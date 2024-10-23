@@ -1,4 +1,4 @@
-import { el, app, state, reactive } from './index';
+import { el, app, state, reactive } from 'markupless';
 
 const todos = state<string[]>([]);
 const todo = state<string>("");

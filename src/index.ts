@@ -128,7 +128,9 @@ export function el(tag: string): Element {
 }
 
 export function app(props: ElementProps, root: Element): void {
-  document.body.appendChild(root.render());
+  console.log(props)
+  const rootElement = root.render();
+  document.body.appendChild(rootElement);
 }
 
 type Subscriber<T> = (value: T) => void;
