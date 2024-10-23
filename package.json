@@ -1,7 +1,7 @@
 {
   "name": "markupless",
-  "description":"Frontend framework with Fluent-API",
-  "version": "0.0.1",
+  "description": "Frontend framework with Fluent-API",
+  "version": "0.0.3",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -20,13 +20,16 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "build-pkg": "tsup src/index.ts --format cjs,esm --minify",
+    "build-pkg": "tsup src/index.ts --format cjs,esm --minify --dts",
     "test": "vitest",
     "prepublishOnly": "pnpm run build-pkg"
   },
   "devDependencies": {
     "tsup": "^8.3.0",
-    "typescript": "^5.5.3",
-    "vite": "^5.4.8"
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "markupless": "^0.0.3"
   }
 }

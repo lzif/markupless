@@ -7,16 +7,20 @@ settings:
 importers:
 
   .:
+    dependencies:
+      markupless:
+        specifier: ^0.0.3
+        version: 0.0.3
     devDependencies:
       tsup:
         specifier: ^8.3.0
         version: 8.3.0(postcss@8.4.47)(typescript@5.6.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5.6.3
         version: 5.6.3
       vite:
-        specifier: ^5.4.8
-        version: 5.4.9
+        specifier: ^5.4.10
+        version: 5.4.10
 
 packages:
 
@@ -601,6 +605,12 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
+  markupless@0.0.2:
+    resolution: {integrity: sha512-IEmNdgmRCPs+Wl2z8V/ZQv66PWmWwp0pYGhCJs2RFA42ldH0/oiiWHya/Jc+Ob1xm2V6fmppXIf7+P45NdpX0w==}
+
+  markupless@0.0.3:
+    resolution: {integrity: sha512-pDLwmItCrID84nv6E7N7cezuTZJhpJyc5Bs8MUo4ExQdLcEQB8qgEbvyJNdTU+4+WggFBiDKgPkCgGKwERVtSQ==}
+
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
 
@@ -805,8 +815,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  vite@5.4.9:
-    resolution: {integrity: sha512-20OVpJHh0PAM0oSOELa5GaZNWeDjcAvQjGXy2Uyr+Tp+/D2/Hdz6NLgpJLsarPTA2QJ6v8mX2P1ZfbsSKvdMkg==}
+  vite@5.4.10:
+    resolution: {integrity: sha512-1hvaPshuPUtxeQ0hsVH3Mud0ZanOLwVTneA1EgbAM5LhaZEqyPWGRQ7BtaMvUrTDeEaC8pxtj6a6jku3x4z6SQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -1285,6 +1295,12 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
+  markupless@0.0.2: {}
+
+  markupless@0.0.3:
+    dependencies:
+      markupless: 0.0.2
+
   merge-stream@2.0.0: {}
 
   mimic-fn@2.1.0: {}
@@ -1478,7 +1494,7 @@ snapshots:
 
   typescript@5.6.3: {}
 
-  vite@5.4.9:
+  vite@5.4.10:
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.47
