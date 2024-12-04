@@ -1,34 +1,16 @@
 {
-  "name": "markupless-framework",
+  "name": "@px/void",
   "version": "0.1.0",
-  "description": "A fluent, readable JavaScript frontend framework with magical abstractions",
+  "description": "fluent, readable JavaScript framework that eliminates markup with magical abstractions.",
   "type": "module",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
-  },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite",
-    "build": "tsup",
-    "build:watch": "tsup --watch",
+    "build": "vite build",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,md}\"",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run test && npm run lint && npm run build"
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
   },
   "keywords": [
     "frontend",
@@ -38,14 +20,11 @@
     "reactive",
     "lightweight"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Luki Zainur <lukyfriendly@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/markupless-framework.git"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "url": "https://github.com/lzif/markupless.git"
   },
   "browserslist": [
     ">0.2%",
@@ -53,54 +32,21 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "@typescript-eslint/eslint-plugin": "^6.13.0",
-    "@typescript-eslint/parser": "^6.13.0",
-    "@vitest/coverage-v8": "^1.0.0",
-    "@vitest/ui": "^1.0.0",
-    "eslint": "^8.54.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "prettier": "^3.1.0",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.2",
-    "vite": "^5.0.4",
-    "vitepress": "^1.0.0-rc.31",
-    "vitest": "^1.0.0"
-  },
-  "tsup": {
-    "entry": ["src/index.ts"],
-    "format": ["cjs", "esm"],
-    "dts": true,
-    "sourcemap": true,
-    "clean": true,
-    "minify": true
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
-    "rules": {
-      "no-console": "warn",
-      "@typescript-eslint/no-unused-vars": "error"
-    }
-  },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": true,
-    "printWidth": 80
+    "@types/node": "^22.10.1",
+    "@vitest/coverage-v8": "^2.1.8",
+    "@vitest/ui": "^2.1.8",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.2",
+    "vitest": "^2.1.8",
+    "@antfu/eslint-config": "^3.11.2",
+    "eslint": "^9.15.0"
   },
   "vitest": {
     "environment": "jsdom",
     "globals": true,
-    "setupFiles": ["./vitest.setup.ts"]
+    "setupFiles": [
+      "./vitest.setup.ts"
+    ]
   }
 }

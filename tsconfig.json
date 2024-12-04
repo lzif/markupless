@@ -5,7 +5,7 @@
     "module": "ESNext",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "moduleResolution": "node",
-    
+
     // Paths & Base URL
     "baseUrl": ".",
     "paths": {
@@ -48,13 +48,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.spec.ts"
-  ]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }
