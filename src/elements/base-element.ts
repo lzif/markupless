@@ -28,9 +28,11 @@ export class BaseElement {
   }
 
   style(styles: Partial<CSSStyleDeclaration>): this {
-    this.attributes['style'] = Object.entries(styles)
-      .map(([key, value]) => `${key}: ${value}`)
+    const existingStyles = this.attributes['style'] || '';
+    const newStyles = Object.entries(styles)
+      .map(([key, value]) => `${key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`)}: ${value}`)
       .join('; ');
+    this.attributes['style'] = existingStyles ? `${existingStyles}; ${newStyles}` : newStyles;
     return this;
   }
 
