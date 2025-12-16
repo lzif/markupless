@@ -39,29 +39,29 @@ markupless-framework/
 
 ## Fase 1: Arsitektur Dasar
 1. Merancang Arsitektur Inti
-   - [ ] Buat struktur direktori sesuai rancangan
-   - [ ] Setup project dengan module bundler (misalnya Webpack/Rollup)
-   - [ ] Konfigurasi build system
-   - [ ] Setup testing framework (Jest)
+   - [x] Buat struktur direktori sesuai rancangan
+   - [x] Setup project dengan module bundler (misalnya Webpack/Rollup)
+   - [x] Konfigurasi build system
+   - [x] Setup testing framework (Vitest)
 
 2. Implementasi Core Application
-   - [ ] Buat `app.ts` sebagai entry point
-   - [ ] Implementasi method `.setTitle()`
-   - [ ] Implementasi method `.addStyle()`
-   - [ ] Implementasi method `.state()`
-   - [ ] Implementasi method `.logic()`
-   - [ ] Implementasi method `.add()`
-   - [ ] Implementasi method `.render()`
+   - [x] Buat `app.ts` sebagai entry point
+   - [x] Implementasi method `.setTitle()`
+   - [x] Implementasi method `.addStyle()`
+   - [x] Implementasi method `.state()`
+   - [x] Implementasi method `.logic()`
+   - [x] Implementasi method `.add()`
+   - [x] Implementasi method `.render()`
 
 ## Fase 2: Manajemen Elemen
 3. Bangun Sistem Elemen
-   - [ ] Buat base class `BaseElement`
-   - [ ] Implementasi text elements (h1, h2, p)
-   - [ ] Implementasi container elements (section, div)
-   - [ ] Implementasi interactive elements (button)
-   - [ ] Tambahkan method `.with()` untuk komposisi
-   - [ ] Tambahkan method `.style()` untuk styling
-   - [ ] Tambahkan method `.onClick()` untuk event handling
+   - [x] Buat base class `BaseElement`
+   - [x] Implementasi text elements (h1, h2, p)
+   - [x] Implementasi container elements (section, div)
+   - [x] Implementasi interactive elements (button)
+   - [x] Tambahkan method `.with()` untuk komposisi
+   - [x] Tambahkan method `.style()` untuk styling
+   - [x] Tambahkan method `.onClick()` untuk event handling
 
 ## Fase 3: State Management
 4. Kembangkan State Management
@@ -103,4 +103,3 @@ markupless-framework/
    - [ ] Buat script build
    - [ ] Publikasi ke npm
    - [ ] Setup CI/CD
-
