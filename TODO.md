@@ -67,8 +67,8 @@ markupless-framework/
 4. Kembangkan State Management
    - [x] Buat mekanisme state reaktif
    - [x] Implementasi pelacakan perubahan state
-   - [ ] Buat sistem binding state ke DOM
-   - [ ] Implementasi logika update otomatis
+   - [x] Buat sistem binding state ke DOM
+   - [x] Implementasi logika update otomatis
 
 ## Fase 4: Style & Theming
 5. Sistem Styling Dinamis

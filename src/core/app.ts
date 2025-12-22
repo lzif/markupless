@@ -1,5 +1,5 @@
 import { BaseElement } from "@/elements/base-element";
-import { state as createState } from "@/core/state";
+import { state, State } from "@/core/state";
 
 export class App {
   public root: HTMLElement | null = null;
@@ -41,9 +41,8 @@ export class App {
     return this;
   }
 
-  public state<T>(initialState: T): this {
-    this._state = createState(initialState);
-    return this;
+  public state<T>(initialState: T): State<T> {
+    return state(initialState);
   }
 
   public logic(logicFn: (state: any, actions: any) => any): this {

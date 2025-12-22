@@ -1,3 +1,5 @@
+import { effect, State } from "@/core/state";
+
 export class BaseElement {
   private tagName: string;
   private attributes: Record<string, string>;
@@ -5,6 +7,7 @@ export class BaseElement {
   private textContent: string = ""
   private eventListeners: Map<string, EventListener> = new Map();
   private readonly isInBrowser: boolean;
+  private textEffect: (() => void) | null = null;
 
   constructor(tagName: string) {
     this.tagName = tagName;
@@ -22,9 +25,28 @@ export class BaseElement {
     return this;
   }
 
-  text(content: string): this {
-    this.textContent = content
-    return this
+  text(content: string | State<string | number> | (() => string | number)): this {
+    if (typeof content === 'string') {
+      this.textContent = content;
+    } else if (typeof content === 'function') {
+        // It's a getter function, use effect to track changes
+        this.textEffect = () => {
+            const val = content();
+            this.textContent = String(val);
+            if(this.domElement) {
+                this.domElement.textContent = this.textContent;
+            }
+        }
+    } else if (content && typeof content === 'object' && 'value' in content) {
+        // It's a State object
+         this.textEffect = () => {
+            this.textContent = String(content.value);
+            if(this.domElement) {
+                this.domElement.textContent = this.textContent;
+            }
+        }
+    }
+    return this;
   }
 
   style(styles: Partial<CSSStyleDeclaration>): this {
@@ -56,6 +78,8 @@ export class BaseElement {
     return this;
   }
 
+  private domElement: HTMLElement | null = null;
+
   private readonly voidElements: Set<string> = new Set([
     'area', 'base', 'br', 'col', 'embed', 'hr', 'img',
     'input', 'link', 'meta', 'source', 'track', 'wbr'
@@ -64,12 +88,18 @@ export class BaseElement {
   private createElement(): HTMLElement | string {
     if (this.isInBrowser) {
       const element = document.createElement(this.tagName);
+      this.domElement = element;
 
       Object.entries(this.attributes).forEach(([key, value]) => {
         element.setAttribute(key, value);
       });
 
-      element.textContent = this.textContent
+      // Initialize text content (using effect if available)
+      if (this.textEffect) {
+          effect(this.textEffect);
+      } else {
+          element.textContent = this.textContent;
+      }
 
       for (const eventName of this.eventListeners.keys()) {
         const listeners = this.eventListeners.get(eventName);

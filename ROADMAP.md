@@ -25,8 +25,8 @@
 ## Phase 3: State Management
 - [x] Reactive state mechanism
 - [x] State tracking
-- [ ] State binding to DOM
-- [ ] Automatic updates
+- [x] State binding to DOM
+- [x] Automatic updates
 
 ## Phase 4: Style & Theming
 - [ ] Dynamic styling mechanism
