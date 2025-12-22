@@ -5,6 +5,8 @@ export class App {
   public root: HTMLElement | null = null;
   public components: BaseElement[] = [];
   public configOptions: { title?: string } = {};
+  public _state: any = null;
+  public _actions: any = {};
 
   constructor(target?: string) {
     if (this.isBrowser && target) {
@@ -44,7 +46,8 @@ export class App {
   }
 
   public logic(logicFn: (state: any, actions: any) => any): this {
-    // TODO: Implement logic handling
+    // logicFn returns an object of actions
+    this._actions = logicFn(this._state, this._actions);
     return this;
   }
 

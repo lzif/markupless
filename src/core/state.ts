@@ -24,7 +24,7 @@ function state<T>(initialValue: T): State<T> {
         target[key as keyof typeof target] = newValue;
         dependents.forEach(effect => effect());
       }
-      return true;
+      return result;
     }
   });
 
@@ -40,5 +40,3 @@ function effect(fn: () => void) {
   };
   run();
 }
-
-export { state, effect };
