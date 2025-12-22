@@ -1,9 +1,13 @@
-let activeEffect = null;
+let activeEffect: (() => void) | null = null;
 const stateMap = new WeakMap();
 
-function state(initialValue) {
+export interface State<T> {
+  value: T;
+}
+
+function state<T>(initialValue: T): State<T> {
   let value = initialValue;
-  const dependents = new Set();
+  const dependents = new Set<() => void>();
 
   const proxy = new Proxy({ value }, {
     get(target, key) {
@@ -11,13 +15,13 @@ function state(initialValue) {
         if (activeEffect) {
           dependents.add(activeEffect);
         }
-        return target[key];
+        return target[key as keyof typeof target];
       }
-      return target[key];
+      return target[key as keyof typeof target];
     },
     set(target, key, newValue) {
-      if (key === 'value' && target[key] !== newValue) {
-        target[key] = newValue;
+      if (key === 'value' && target[key as keyof typeof target] !== newValue) {
+        target[key as keyof typeof target] = newValue;
         dependents.forEach(effect => effect());
       }
       return true;
@@ -25,10 +29,10 @@ function state(initialValue) {
   });
 
   stateMap.set(proxy, { dependents, value });
-  return proxy;
+  return proxy as State<T>;
 }
 
-function effect(fn) {
+function effect(fn: () => void) {
   const run = () => {
     activeEffect = run;
     fn();

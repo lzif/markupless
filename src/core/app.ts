@@ -1,4 +1,5 @@
 import { BaseElement } from "@/elements/base-element";
+import { state, State } from "@/core/state";
 
 export class App {
   public root: HTMLElement | null = null;
@@ -38,9 +39,8 @@ export class App {
     return this;
   }
 
-  public state<T>(initialState: T): this {
-    // TODO: Implement state management
-    return this;
+  public state<T>(initialState: T): State<T> {
+    return state(initialState);
   }
 
   public logic(logicFn: (state: any, actions: any) => any): this {
