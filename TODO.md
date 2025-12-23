@@ -72,10 +72,10 @@ markupless-framework/
 
 ## Fase 4: Style & Theming
 5. Sistem Styling Dinamis
-   - [ ] Buat mekanisme style inline
-   - [ ] Implementasi hover styles
-   - [ ] Buat sistem tema/preset
-   - [ ] Tambahkan dukungan CSS-in-JS
+   - [x] Buat mekanisme style inline
+   - [x] Implementasi hover styles
+   - [x] Buat sistem tema/preset
+   - [x] Tambahkan dukungan CSS-in-JS
 
 ## Fase 5: Advanced Features
 6. Fitur Lanjutan
