@@ -29,10 +29,10 @@
 - [x] Automatic updates
 
 ## Phase 4: Style & Theming
-- [ ] Dynamic styling mechanism
-- [ ] Hover styles
-- [ ] Theme system
-- [ ] CSS-in-JS support
+- [x] Dynamic styling mechanism
+- [x] Hover styles
+- [x] Theme system
+- [x] CSS-in-JS support
 
 ## Phase 5: Advanced Features
 - [ ] Simple routing

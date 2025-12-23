@@ -5,7 +5,7 @@ export interface State<T> {
   value: T;
 }
 
-function state<T>(initialValue: T): State<T> {
+export function state<T>(initialValue: T): State<T> {
   let value = initialValue;
   const dependents = new Set<() => void>();
 
@@ -24,7 +24,7 @@ function state<T>(initialValue: T): State<T> {
         target[key as keyof typeof target] = newValue;
         dependents.forEach(effect => effect());
       }
-      return result;
+      return true;
     }
   });
 
@@ -32,7 +32,7 @@ function state<T>(initialValue: T): State<T> {
   return proxy as State<T>;
 }
 
-function effect(fn: () => void) {
+export function effect(fn: () => void) {
   const run = () => {
     activeEffect = run;
     fn();

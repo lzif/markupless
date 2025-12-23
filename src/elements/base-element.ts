@@ -1,4 +1,6 @@
 import { effect, State } from "@/core/state";
+import { StyleObject } from "@/styles/types";
+import { StyleManager } from "@/styles/style-manager";
 
 export class BaseElement {
   private tagName: string;
@@ -56,8 +58,16 @@ export class BaseElement {
     return this;
   }
 
+  css(styles: StyleObject): this {
+    const className = StyleManager.getInstance().inject(styles);
+    const existingClass = this.attributes['class'] || '';
+    this.attributes['class'] = existingClass ? `${existingClass} ${className}` : className;
+    return this;
+  }
+
   class(className: string): this {
-    this.attributes['class'] = className;
+    const existingClass = this.attributes['class'] || '';
+    this.attributes['class'] = existingClass ? `${existingClass} ${className}` : className;
     return this;
   }
 
