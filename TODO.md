@@ -79,7 +79,7 @@ markupless-framework/
 
 ## Fase 5: Advanced Features
 6. Fitur Lanjutan
-   - [ ] Routing sederhana
+   - [x] Routing sederhana
    - [ ] Validasi input
    - [ ] Plugin system
    - [ ] Performance optimization

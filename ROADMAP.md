@@ -35,7 +35,7 @@
 - [x] CSS-in-JS support
 
 ## Phase 5: Advanced Features
-- [ ] Simple routing
+- [x] Simple routing
 - [ ] Input validation
 - [ ] Plugin system
 
