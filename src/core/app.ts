@@ -1,5 +1,6 @@
 import { BaseElement } from "@/elements/base-element";
 import { state, State } from "@/core/state";
+import { Router, RouteHandler } from "@/core/router";
 
 export class App {
   public root: HTMLElement | null = null;
@@ -7,6 +8,7 @@ export class App {
   public configOptions: { title?: string } = {};
   public _state: any = null;
   public _actions: any = {};
+  public router: Router = new Router();
 
   constructor(target?: string) {
     if (this.isBrowser && target) {
@@ -65,6 +67,11 @@ export class App {
     return this.add(component);
   }
 
+  public route(path: string, handler: RouteHandler): this {
+    this.router.register(path, handler);
+    return this;
+  }
+
   /**
    * @description Render the app
    */
@@ -74,16 +81,32 @@ export class App {
     }
 
     if (!this.root) {
-       // If no root is specified, maybe we can append to body?
-       // For now, let's assume root is required for render() if not passed in constructor.
-       // But wait, the original code had 'target' in `app(target)`.
-       // Let's stick to the requirement that root must be set.
        throw new Error('Root element is not set. Please provide a selector in the constructor.');
     }
 
-    this.components.forEach(component => {
-      this.root?.appendChild(component.render());
-    });
+    if (this.router.hasRoutes()) {
+        const renderRoute = () => {
+            if (!this.root) return;
+            this.root.innerHTML = "";
+            const component = this.router.resolve();
+            if (component) {
+                this.root.appendChild(component.render());
+            } else {
+                // If no route matches and no fallback, maybe show components added via .add()?
+                // But usually routing takes over.
+                // Let's verify if we have components to fallback to?
+                // For now, let's keep it simple: if routing is used, it controls the view.
+            }
+        };
+
+        this.router.subscribe(renderRoute);
+        renderRoute();
+    } else {
+        this.components.forEach(component => {
+            this.root?.appendChild(component.render());
+        });
+    }
+
     return this;
   }
 
@@ -91,12 +114,10 @@ export class App {
    * @description Render the app to string (server-side rendering)
    */
   renderToString(): string {
-    if (this.isBrowser) {
-      // throw new Error('Render to string is only supported on the server');
-      // Actually, rendering to string might be useful in browser too for debugging or other purposes.
-      // But let's keep it simple for now.
+    if (this.router.hasRoutes()) {
+        const component = this.router.resolve();
+        return component ? component.renderToString() : "";
     }
-
     return this.components.map(component => component.renderToString()).join("");
   }
 }
