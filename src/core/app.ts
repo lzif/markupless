@@ -1,6 +1,7 @@
 import { BaseElement } from "@/elements/base-element";
 import { state, State } from "@/core/state";
 import { Router, RouteHandler } from "@/core/router";
+import { Plugin } from "@/core/plugin";
 
 export class App {
   public root: HTMLElement | null = null;
@@ -9,6 +10,7 @@ export class App {
   public _state: any = null;
   public _actions: any = {};
   public router: Router = new Router();
+  public plugins: Set<string> = new Set();
 
   constructor(target?: string) {
     if (this.isBrowser && target) {
@@ -72,6 +74,16 @@ export class App {
     return this;
   }
 
+  public use(plugin: Plugin): this {
+    if (this.plugins.has(plugin.name)) {
+      console.warn(`Plugin ${plugin.name} is already installed.`);
+      return this;
+    }
+    plugin.install(this);
+    this.plugins.add(plugin.name);
+    return this;
+  }
+
   /**
    * @description Render the app
    */
@@ -114,6 +126,7 @@ export class App {
    * @description Render the app to string (server-side rendering)
    */
   renderToString(): string {
+    // Check if routing is active
     if (this.router.hasRoutes()) {
         const component = this.router.resolve();
         return component ? component.renderToString() : "";
