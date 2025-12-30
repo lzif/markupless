@@ -37,7 +37,7 @@
 ## Phase 5: Advanced Features
 - [x] Simple routing
 - [x] Input validation
-- [ ] Plugin system
+- [x] Plugin system
 
 ## Phase 6: Documentation & Testing
 - [ ] API Documentation

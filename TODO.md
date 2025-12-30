@@ -81,9 +81,9 @@ markupless-framework/
 6. Fitur Lanjutan
    - [x] Routing sederhana
    - [x] Validasi input
-   - [ ] Plugin system
+   - [x] Plugin system
    - [ ] Performance optimization
-   - [ ] Server-side rendering support
+   - [x] Server-side rendering support
 
 ## Fase 6: Dokumentasi & Testing
 7. Dokumentasi
