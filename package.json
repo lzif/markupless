@@ -1,41 +1,44 @@
 {
-	"name": "@px/void",
-	"version": "0.1.0",
-	"description": "fluent, readable JavaScript framework that eliminates markup with magical abstractions.",
-	"type": "module",
-	"main": "out/index.js",
-	"types": "out/index.d.ts",
-	"files": [
-		"out/*"
-	],
-	"scripts": {
-		"dev": "bun run --watch example/index.html",
-		"prepublishOnly": "bun run build"
-	},
-	"keywords": [
-		"frontend",
-		"framework",
-		"typescript",
-		"ui",
-		"reactive",
-		"lightweight"
-	],
-	"author": "Luki Zainur <lukyfriendly@gmail.com>",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/lzif/markupless.git"
-	},
-	"browserslist": [
-		">0.2%",
-		"not dead",
-		"not ie <= 11",
-		"not op_mini all"
-	],
-	"devDependencies": {
-		"bun-plugin-dts": "^0.3.0",
-		"happy-dom": "^20.0.11",
-		"typescript": "^5.9.3",
-		"vitest": "^4.0.16"
-	}
+  "name": "markupless",
+  "version": "0.3.0",
+  "description": "fluent, readable JavaScript framework that eliminates markup with magical abstractions.",
+  "type": "module",
+  "main": "out/index.js",
+  "types": "out/index.d.ts",
+  "files": [
+    "out/*"
+  ],
+  "scripts": {
+    "dev": "bun run --watch example/index.html",
+    "docs": "typedoc --entryPointStrategy Expand src",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "frontend",
+    "framework",
+    "typescript",
+    "ui",
+    "reactive",
+    "lightweight"
+  ],
+  "author": "Luki Zainur <lukyfriendly@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lzif/markupless.git"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/bun": "^1.3.5",
+    "bun-plugin-dts": "^0.3.0",
+    "happy-dom": "^20.0.11",
+    "typedoc": "^0.28.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
+  }
 }

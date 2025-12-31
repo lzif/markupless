@@ -1,140 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>documentation</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="doc-current-file" content="">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="page.css">
-  <link id="ddocResetStylesheet" rel="stylesheet" href="reset.css"><link href="comrak.css" rel="stylesheet" /><link href="prism.css" rel="stylesheet" /><script src="prism.js"></script><script src="script.js" defer></script>
-  <script src="darkmode_toggle.js"></script><script src="search_index.js" defer></script>
-    <script src="fuse.js" defer></script>
-    <script src="search.js" defer></script></head>
-<body>
-<div class="ddoc">
-<div><nav id="topnav">
-  <div class="h-full">
-    <div class="flex items-center"><ul class="breadcrumbs"><li>index</li></ul>
-</div>
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>markupless</title><meta name="description" content="Documentation for markupless"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">markupless</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>markupless</h1></div><div class="tsd-panel tsd-typography"><h1 id="markupless-framework-🚀✨" class="tsd-anchor-link"><strong>Markupless Framework</strong> 🚀✨<a href="#markupless-framework-🚀✨" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p><img src="https://img.shields.io/badge/Version-1.0.0-blue" alt="Markupless Version"><br>
+<img src="https://img.shields.io/badge/License-MIT-green" alt="License"><br>
+<img src="https://img.shields.io/badge/Built%20With-TypeScript-blue" alt="TypeScript"><br>
+<img src="https://img.shields.io/badge/Maintainability-A%2B-brightgreen" alt="Maintainability"><br>
+<img src="https://img.shields.io/badge/Downloads-10k%2B-orange" alt="Downloads"></p>
+<p>Markupless adalah <strong>JavaScript Framework</strong> modern yang menawarkan pendekatan <strong>tanpa markup</strong> untuk membangun aplikasi berbasis web yang <strong>readable</strong>, <strong>intuitif</strong>, dan <strong>minim boilerplate</strong>! 🚀 Dibuat untuk pengembang yang ingin fokus pada <strong>logic dan hasil akhir</strong>, Markupless memungkinkan Anda membuat aplikasi yang <strong>clean</strong>, <strong>magically working</strong>, dan <strong>powerful</strong>.</p>
+<h2 id="🔥-fitur-utama" class="tsd-anchor-link"><strong>🔥 Fitur Utama</strong><a href="#🔥-fitur-utama" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li><strong>Fluent API</strong>: Setiap method terasa seperti kalimat natural! 🧠</li>
+<li><strong>Reactive State Management</strong>: Kelola state dengan mudah dan otomatis update UI. 🌟</li>
+<li><strong>Lifecycle Hooks</strong>: Jalankan fungsi sebelum dan sesudah render. ⏳</li>
+<li><strong>Plugin System</strong>: Tambahkan ekstensi dan fitur tanpa ribet. 🔌</li>
+<li><strong>Declarative UI</strong>: Bangun UI tanpa harus menyentuh HTML atau DOM. 🛠️</li>
+<li><strong>Dynamic Routing</strong>: Routing yang fleksibel dan gampang diatur. 🗺️</li>
+<li><strong>Global Theming</strong>: Ubah tema aplikasi dengan sekali konfigurasi. 🎨</li>
+<li><strong>TypeScript Support</strong>: Dengan type safety untuk mencegah error. ✅</li>
+</ul>
+<hr>
+<h2 id="🚀-cara-install" class="tsd-anchor-link"><strong>🚀 Cara Install</strong><a href="#🚀-cara-install" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Install dengan npm:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">markupless</span>
+</code><button type="button">Copy</button></pre>
 
-    <div class="flex items-center gap-2">
-      <button id="theme-toggle" type="button" aria-label="Toggle dark mode" style="display: none;"><svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="14"
-  height="14"
-  viewBox="0 0 24 24"
-  fill="currentColor"
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path
-    d="M12 1.992a10 10 0 1 0 9.236 13.838c.341 -.82 -.476 -1.644 -1.298 -1.31a6.5 6.5 0 0 1 -6.864 -10.787l.077 -.08c.551 -.63 .113 -1.653 -.758 -1.653h-.266l-.068 -.006l-.06 -.002z"
-  />
-</svg>
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="14"
-  height="14"
-  viewBox="0 0 24 24"
-  fill="currentColor"
-  class="hidden"
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path
-    d="M12 19a1 1 0 0 1 .993 .883l.007 .117v1a1 1 0 0 1 -1.993 .117l-.007 -.117v-1a1 1 0 0 1 1 -1z"
-  />
-  <path
-    d="M18.313 16.91l.094 .083l.7 .7a1 1 0 0 1 -1.32 1.497l-.094 -.083l-.7 -.7a1 1 0 0 1 1.218 -1.567l.102 .07z"
-  />
-  <path
-    d="M7.007 16.993a1 1 0 0 1 .083 1.32l-.083 .094l-.7 .7a1 1 0 0 1 -1.497 -1.32l.083 -.094l.7 -.7a1 1 0 0 1 1.414 0z"
-  />
-  <path
-    d="M4 11a1 1 0 0 1 .117 1.993l-.117 .007h-1a1 1 0 0 1 -.117 -1.993l.117 -.007h1z"
-  />
-  <path
-    d="M21 11a1 1 0 0 1 .117 1.993l-.117 .007h-1a1 1 0 0 1 -.117 -1.993l.117 -.007h1z"
-  />
-  <path
-    d="M6.213 4.81l.094 .083l.7 .7a1 1 0 0 1 -1.32 1.497l-.094 -.083l-.7 -.7a1 1 0 0 1 1.217 -1.567l.102 .07z"
-  />
-  <path
-    d="M19.107 4.893a1 1 0 0 1 .083 1.32l-.083 .094l-.7 .7a1 1 0 0 1 -1.497 -1.32l.083 -.094l.7 -.7a1 1 0 0 1 1.414 0z"
-  />
-  <path
-    d="M12 2a1 1 0 0 1 .993 .883l.007 .117v1a1 1 0 0 1 -1.993 .117l-.007 -.117v-1a1 1 0 0 1 1 -1z"
-  />
-  <path
-    d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
-  />
-</svg>
-</button>
+<hr>
+<h2 id="📖-contoh-penggunaan" class="tsd-anchor-link"><strong>📖 Contoh Penggunaan</strong><a href="#📖-contoh-penggunaan" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Buat aplikasi <strong>&quot;Hello World&quot;</strong> dalam hitungan detik:</p>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">app</span><span class="hl-1">, </span><span class="hl-4">section</span><span class="hl-1">, </span><span class="hl-4">h1</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;markupless&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">app</span><span class="hl-1">()</span><br/><span class="hl-1">  .</span><span class="hl-0">config</span><span class="hl-1">({ </span><span class="hl-4">title:</span><span class="hl-1"> </span><span class="hl-2">&quot;Hello Markupless!&quot;</span><span class="hl-1"> })</span><br/><span class="hl-1">  .</span><span class="hl-0">add</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-0">section</span><span class="hl-1">().</span><span class="hl-0">with</span><span class="hl-1">(</span><br/><span class="hl-1">      </span><span class="hl-0">h1</span><span class="hl-1">(</span><span class="hl-2">&quot;Hello, World!&quot;</span><span class="hl-1">).</span><span class="hl-0">style</span><span class="hl-1">({</span><br/><span class="hl-1">        </span><span class="hl-4">color:</span><span class="hl-1"> </span><span class="hl-2">&quot;#007BFF&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-4">textAlign:</span><span class="hl-1"> </span><span class="hl-2">&quot;center&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">      })</span><br/><span class="hl-1">    )</span><br/><span class="hl-1">  )</span><br/><span class="hl-1">  .</span><span class="hl-0">render</span><span class="hl-1">();</span>
+</code><button type="button">Copy</button></pre>
 
-        <input
-          type="text"
-          id="searchbar"
-          style="display: none;"
-          class="py-2 px-2.5 mx-1 rounded text-sm border border-gray-300 bg-transparent dark:bg-gray-800 dark:border-gray-700"
-          />
-    </div>
-  </div>
-</nav>
-<div id="searchResults"></div><div id="content">
-    <main><section>
-  <div class="space-y-2 flex-1"><div class="space-y-7" id="module_doc"></div>
-</div>
-</section>
-</main><div class="toc">
-    <div><nav class="topSymbols">
-          <h3>Symbols</h3>
-          <ul><li>
-                <a href=".&#x2F;.&#x2F;~&#x2F;App.html" title="App"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    App
-                  </span>
-                </a>
-              </li><li>
-                <a href=".&#x2F;.&#x2F;~&#x2F;BaseElement.html" title="BaseElement"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    BaseElement
-                  </span>
-                </a>
-              </li><li>
-                <a href=".&#x2F;.&#x2F;~&#x2F;ButtonElement.html" title="ButtonElement"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    ButtonElement
-                  </span>
-                </a>
-              </li><li>
-                <a href=".&#x2F;.&#x2F;~&#x2F;CSSValue.html" title="CSSValue"><div class="docNodeKindIcon"><div class="text-TypeAlias bg-TypeAlias/15 dark:text-TypeAliasDark dark:bg-TypeAliasDark/15" title="Type Alias">T</div></div>
-<span class="hover:bg-TypeAlias/15 hover:bg-TypeAliasDark/15">
-                    CSSValue
-                  </span>
-                </a>
-              </li><li>
-                <a href=".&#x2F;.&#x2F;~&#x2F;ContainerElement.html" title="ContainerElement"><div class="docNodeKindIcon"><div class="text-Class bg-Class/15 dark:text-ClassDark dark:bg-ClassDark/15" title="Class">c</div></div>
-<span class="hover:bg-Class/15 hover:bg-ClassDark/15">
-                    ContainerElement
-                  </span>
-                </a>
-              </li></ul><a class="flex items-center gap-0.5" href=".&#x2F;all_symbols.html">
-              <span class="leading-none">view all 67 symbols</span><svg
-  width="16"
-  height="16"
-  viewBox="0 0 16 16"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path
-    fill-rule="evenodd"
-    clip-rule="evenodd"
-    d="M5.76748 11.8159C5.5378 11.577 5.54525 11.1972 5.78411 10.9675L8.93431 8L5.78411 5.0325C5.54525 4.80282 5.5378 4.423 5.76748 4.18413C5.99715 3.94527 6.37698 3.93782 6.61584 4.1675L10.2158 7.5675C10.3335 7.68062 10.4 7.83679 10.4 8C10.4 8.16321 10.3335 8.31938 10.2158 8.4325L6.61584 11.8325C6.37698 12.0622 5.99715 12.0547 5.76748 11.8159Z"
-    fill="currentColor"
-  />
-</svg>
-</a></nav></div>
-  </div></div>
-</div>
-</div>
-</body>
-</html>
+<hr>
+<h2 id="✨-contoh-fitur" class="tsd-anchor-link"><strong>✨ Contoh Fitur</strong><a href="#✨-contoh-fitur" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><h3 id="to-do-list-app" class="tsd-anchor-link"><strong>To-Do List App</strong><a href="#to-do-list-app" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="typescript"><span class="hl-0">app</span><span class="hl-1">()</span><br/><span class="hl-1">  .</span><span class="hl-0">state</span><span class="hl-1">({ </span><span class="hl-4">tasks:</span><span class="hl-1"> [], </span><span class="hl-4">newTask:</span><span class="hl-1"> </span><span class="hl-2">&quot;&quot;</span><span class="hl-1"> })</span><br/><span class="hl-1">  .</span><span class="hl-0">logic</span><span class="hl-1">((</span><span class="hl-4">state</span><span class="hl-1">, </span><span class="hl-4">actions</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> ({</span><br/><span class="hl-1">    </span><span class="hl-0">addTask</span><span class="hl-4">:</span><span class="hl-1"> () </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">      </span><span class="hl-3">if</span><span class="hl-1"> (</span><span class="hl-4">state</span><span class="hl-1">.</span><span class="hl-4">newTask</span><span class="hl-1">) </span><span class="hl-4">state</span><span class="hl-1">.</span><span class="hl-4">tasks</span><span class="hl-1">.</span><span class="hl-0">push</span><span class="hl-1">(</span><span class="hl-4">state</span><span class="hl-1">.</span><span class="hl-4">newTask</span><span class="hl-1">);</span><br/><span class="hl-1">      </span><span class="hl-4">state</span><span class="hl-1">.</span><span class="hl-4">newTask</span><span class="hl-1"> = </span><span class="hl-2">&quot;&quot;</span><span class="hl-1">;</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">  }))</span><br/><span class="hl-1">  .</span><span class="hl-0">add</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-0">section</span><span class="hl-1">()</span><br/><span class="hl-1">      .</span><span class="hl-0">with</span><span class="hl-1">(</span><span class="hl-0">input</span><span class="hl-1">().</span><span class="hl-0">onInput</span><span class="hl-1">((</span><span class="hl-4">value</span><span class="hl-1">, </span><span class="hl-4">actions</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> (</span><span class="hl-4">state</span><span class="hl-1">.</span><span class="hl-4">newTask</span><span class="hl-1"> = </span><span class="hl-4">value</span><span class="hl-1">)))</span><br/><span class="hl-1">      .</span><span class="hl-0">with</span><span class="hl-1">(</span><span class="hl-0">button</span><span class="hl-1">(</span><span class="hl-2">&quot;Add&quot;</span><span class="hl-1">).</span><span class="hl-0">onClick</span><span class="hl-1">((</span><span class="hl-4">actions</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-4">actions</span><span class="hl-1">.</span><span class="hl-0">addTask</span><span class="hl-1">()))</span><br/><span class="hl-1">  )</span><br/><span class="hl-1">  .</span><span class="hl-0">add</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-0">ul</span><span class="hl-1">().</span><span class="hl-0">each</span><span class="hl-1">((</span><span class="hl-4">state</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-4">state</span><span class="hl-1">.</span><span class="hl-4">tasks</span><span class="hl-1">, (</span><span class="hl-4">task</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><br/><span class="hl-1">      </span><span class="hl-0">li</span><span class="hl-1">().</span><span class="hl-0">with</span><span class="hl-1">(</span><span class="hl-4">task</span><span class="hl-1">).</span><span class="hl-0">style</span><span class="hl-1">({ </span><span class="hl-4">color:</span><span class="hl-1"> </span><span class="hl-2">&quot;#333&quot;</span><span class="hl-1"> })</span><br/><span class="hl-1">    )</span><br/><span class="hl-1">  )</span><br/><span class="hl-1">  .</span><span class="hl-0">render</span><span class="hl-1">();</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="🛠️-fitur-tambahan" class="tsd-anchor-link"><strong>🛠️ Fitur Tambahan</strong><a href="#🛠️-fitur-tambahan" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>🔌 <strong>Plugin Support</strong>: Tambahkan fitur seperti router atau state plugin.</li>
+<li>🎨 <strong>Customizable Themes</strong>: Buat tema global dengan mudah.</li>
+<li>🧩 <strong>Declarative Components</strong>: Fokus pada desain tanpa pusing DOM.</li>
+</ul>
+<hr>
+<h2 id="📚-dokumentasi" class="tsd-anchor-link"><strong>📚 Dokumentasi</strong><a href="#📚-dokumentasi" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Lihat dokumentasi lengkap di <a href="https://markupless.dev">Markupless Docs</a>.</p>
+<hr>
+<h2 id="💬-komunitas-dukungan" class="tsd-anchor-link"><strong>💬 Komunitas &amp; Dukungan</strong><a href="#💬-komunitas-dukungan" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Bergabung dengan komunitas kami untuk diskusi, tips, atau bantuan:</p>
+<ul>
+<li>🌐 Website: <a href="https://markupless.dev">markupless.dev</a></li>
+<li>🐦 Twitter: <a href="https://twitter.com/markupless_js">@markupless_js</a></li>
+<li>💬 Discord: <a href="https://discord.gg/markupless">Markupless Community</a></li>
+</ul>
+<hr>
+<h2 id="📄-lisensi" class="tsd-anchor-link"><strong>📄 Lisensi</strong><a href="#📄-lisensi" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Markupless dirilis di bawah lisensi <strong>MIT</strong>. Anda bebas menggunakannya untuk proyek apapun! ✌️</p>
+<p><strong>Selamat coding dengan Markupless!</strong> 🚀</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#markupless-framework-🚀✨"><span>Markupless <wbr/>Framework 🚀✨</span></a><ul><li><a href="#🔥-fitur-utama"><span>🔥 <wbr/>Fitur <wbr/>Utama</span></a></li><li><a href="#🚀-cara-install"><span>🚀 <wbr/>Cara <wbr/>Install</span></a></li><li><a href="#📖-contoh-penggunaan"><span>📖 <wbr/>Contoh <wbr/>Penggunaan</span></a></li><li><a href="#✨-contoh-fitur"><span>✨ <wbr/>Contoh <wbr/>Fitur</span></a></li><li><ul><li><a href="#to-do-list-app"><span>To-<wbr/>Do <wbr/>List <wbr/>App</span></a></li></ul></li><li><a href="#🛠️-fitur-tambahan"><span>🛠️ <wbr/>Fitur <wbr/>Tambahan</span></a></li><li><a href="#📚-dokumentasi"><span>📚 <wbr/>Dokumentasi</span></a></li><li><a href="#💬-komunitas-dukungan"><span>💬 <wbr/>Komunitas &amp; <wbr/>Dukungan</span></a></li><li><a href="#📄-lisensi"><span>📄 <wbr/>Lisensi</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">markupless</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
