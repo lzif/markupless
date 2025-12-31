@@ -39,6 +39,19 @@ function createThemeVars<T extends ThemeConfig>(obj: T, prefix = ""): T {
 	return result as T;
 }
 
+/**
+ * Creates a theme by defining CSS variables on the root element.
+ * Returns a mirrored object containing the CSS variable references (`var(--name)`).
+ *
+ * @param config - The theme configuration object.
+ * @returns An object with the same structure but values replaced by CSS variable references.
+ * @example
+ * const theme = createTheme({
+ *   colors: { primary: "#007bff" }
+ * });
+ * // In component:
+ * div().style({ color: theme.colors.primary });
+ */
 export function createTheme<T extends ThemeConfig>(config: T): T {
 	const cssVars = flattenTheme(config);
 
@@ -49,21 +62,6 @@ export function createTheme<T extends ThemeConfig>(config: T): T {
 	}
 
 	// Inject into :root using StyleManager
-	// We use a special selector ':root' which might be handled as a class by default in StyleManager
-	// But wait, StyleManager generates classes.
-	// We need a way to inject global styles or specific selectors.
-
-	// Let's modify StyleManager or just use it to inject raw CSS?
-	// StyleManager currently takes a style object and returns a class name.
-	// It generates `.{class} { ... }`.
-
-	// We need to extend StyleManager to support global styles.
-	// Or we can just hack it:
-	// StyleManager doesn't seem to support arbitrary selectors yet.
-
-	// Let's defer the injection logic for a second and check StyleManager.
-
-	// For now, let's assume we update StyleManager to support 'global' styles.
 	StyleManager.getInstance().injectGlobal({ ":root": rootStyle });
 
 	return createThemeVars(config);

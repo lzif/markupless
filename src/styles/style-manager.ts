@@ -1,5 +1,9 @@
 import { StyleObject } from "./types";
 
+/**
+ * Singleton class that manages CSS injection.
+ * Hashes style objects to generate unique class names and avoids duplicate styles.
+ */
 export class StyleManager {
 	private static instance: StyleManager;
 	private styleElement: HTMLStyleElement | null = null;
@@ -7,6 +11,9 @@ export class StyleManager {
 
 	private constructor() {}
 
+	/**
+	 * Returns the singleton instance of the StyleManager.
+	 */
 	static getInstance(): StyleManager {
 		if (!StyleManager.instance) {
 			StyleManager.instance = new StyleManager();
@@ -38,6 +45,13 @@ export class StyleManager {
 		return this.styleElement!;
 	}
 
+	/**
+	 * Injects a style object into the DOM and returns a unique class name.
+	 * @param style - The style object definition.
+	 * @returns The generated CSS class name.
+	 * @example
+	 * const className = StyleManager.getInstance().inject({ color: "red" });
+	 */
 	inject(style: StyleObject): string {
 		const hash = this.hashStyle(style);
 
@@ -60,6 +74,14 @@ export class StyleManager {
 		return className;
 	}
 
+	/**
+	 * Injects global styles (like resets or theme variables).
+	 * @param styles - A map of selectors to style objects.
+	 * @example
+	 * StyleManager.getInstance().injectGlobal({
+	 *   "body": { margin: 0, padding: 0 }
+	 * });
+	 */
 	injectGlobal(styles: Record<string, StyleObject>): void {
 		let css = "";
 		for (const selector in styles) {

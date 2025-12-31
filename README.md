@@ -1,42 +1,48 @@
-# **Markupless Framework** 🚀✨  
+# **Markupless Framework** 🚀✨
 
-![Markupless Version](https://img.shields.io/badge/Version-1.0.0-blue)  
-![License](https://img.shields.io/badge/License-MIT-green)  
-![TypeScript](https://img.shields.io/badge/Built%20With-TypeScript-blue)  
-![Maintainability](https://img.shields.io/badge/Maintainability-A%2B-brightgreen)  
-![Downloads](https://img.shields.io/badge/Downloads-10k%2B-orange)  
+![Markupless Version](https://img.shields.io/badge/Version-0.3.0-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![TypeScript](https://img.shields.io/badge/Built%20With-TypeScript-blue)
+![Maintainability](https://img.shields.io/badge/Maintainability-A%2B-brightgreen)
 
-Markupless adalah **JavaScript Framework** modern yang menawarkan pendekatan **tanpa markup** untuk membangun aplikasi berbasis web yang **readable**, **intuitif**, dan **minim boilerplate**! 🚀 Dibuat untuk pengembang yang ingin fokus pada **logic dan hasil akhir**, Markupless memungkinkan Anda membuat aplikasi yang **clean**, **magically working**, dan **powerful**.  
+Markupless is a modern **JavaScript Framework** that offers a **markup-less** approach to building web applications. It is **readable**, **intuitive**, and designed to minimize boilerplate! 🚀  
 
-## **🔥 Fitur Utama**  
-
-- **Fluent API**: Setiap method terasa seperti kalimat natural! 🧠  
-- **Reactive State Management**: Kelola state dengan mudah dan otomatis update UI. 🌟  
-- **Lifecycle Hooks**: Jalankan fungsi sebelum dan sesudah render. ⏳  
-- **Plugin System**: Tambahkan ekstensi dan fitur tanpa ribet. 🔌  
-- **Declarative UI**: Bangun UI tanpa harus menyentuh HTML atau DOM. 🛠️  
-- **Dynamic Routing**: Routing yang fleksibel dan gampang diatur. 🗺️  
-- **Global Theming**: Ubah tema aplikasi dengan sekali konfigurasi. 🎨  
-- **TypeScript Support**: Dengan type safety untuk mencegah error. ✅  
+Built for developers who want to focus on **logic and end results**, Markupless allows you to create applications that are **clean**, **magically working**, and **powerful** using a fluent, chainable API.
 
 ---
 
-## **🚀 Cara Install**  
+## **🔥 Key Features**
 
-Install dengan npm:  
+- **Fluent API**: Build your UI with chainable methods that read like natural language. 🧠
+- **Reactive State Management**: Simple, proxy-based state that automatically updates the UI. 🌟
+- **Component System**: Everything is a `BaseElement`, making composition easy. 🧩
+- **Client-Side Routing**: Built-in router for Single Page Applications (SPA). 🗺️
+- **Input Validation**: robust validation utilities for forms. ✅
+- **Plugin System**: Easily extensible architecture. 🔌
+- **CSS-in-JS**: Scoped styling with `StyleManager` and global theming support. 🎨
+- **TypeScript First**: Written in TypeScript for excellent type safety and developer experience. 🛡️
+- **Server-Side Rendering (SSR)**: Support for rendering to strings for SEO and performance. ⚡
+
+---
+
+## **🚀 Installation**
+
+Install via npm:
+
 ```bash
 npm install markupless
 ```
 
 ---
 
-## **📖 Contoh Penggunaan**  
+## **📖 Quick Start**
 
-Buat aplikasi **"Hello World"** dalam hitungan detik:  
+Create a **"Hello World"** application in seconds:
+
 ```typescript
 import { app, section, h1 } from "markupless";
 
-app()
+app("#app")
   .config({ title: "Hello Markupless!" })
   .add(
     section().with(
@@ -51,58 +57,97 @@ app()
 
 ---
 
-## **✨ Contoh Fitur**  
+## **✨ Examples**
 
-### **To-Do List App**  
+### **Interactive To-Do List**
+
+Manage state and lists effortlessly:
+
 ```typescript
-app()
-  .state({ tasks: [], newTask: "" })
-  .logic((state, actions) => ({
-    addTask: () => {
-      if (state.newTask) state.tasks.push(state.newTask);
-      state.newTask = "";
-    },
-  }))
-  .add(
-    section()
-      .with(input().onInput((value, actions) => (state.newTask = value)))
-      .with(button("Add").onClick((actions) => actions.addTask()))
-  )
-  .add(
-    ul().each((state) => state.tasks, (task) =>
-      li().with(task).style({ color: "#333" })
+import { app, section, input, button, ul, li, state, span } from "markupless";
+
+// Define State
+const tasks = state<string[]>([]);
+const newTask = state("");
+
+// Define UI
+app("#app").add(
+  section().with(
+    // Input Area
+    div().with(
+      input()
+        .placeholder("New Task...")
+        .onInput((val) => (newTask.value = val)),
+      button("Add").onClick(() => {
+        if (newTask.value) {
+            tasks.value = [...tasks.value, newTask.value];
+            newTask.value = "";
+        }
+      })
+    ),
+    // Reactive List
+    ul().each(tasks, (task) => 
+      li().with(span(task))
     )
   )
-  .render();
+).render();
+```
+
+### **Form Validation**
+
+Built-in validators make form handling a breeze:
+
+```typescript
+import { validate, required, email } from "markupless";
+
+const emailState = state("");
+const errorState = state("");
+
+input().onInput(val => {
+    emailState.value = val;
+    const errors = validate(val, [required, email]);
+    errorState.value = errors[0] || ""; // Show first error
+});
 ```
 
 ---
 
-## **🛠️ Fitur Tambahan**  
+## **📚 Deep Dive**
 
-- 🔌 **Plugin Support**: Tambahkan fitur seperti router atau state plugin.  
-- 🎨 **Customizable Themes**: Buat tema global dengan mudah.  
-- 🧩 **Declarative Components**: Fokus pada desain tanpa pusing DOM.  
+The framework is organized into core modules:
+
+*   **`src/core`**: The brain of the operation (App, State, Router).
+*   **`src/elements`**: The building blocks (div, span, input, tables, etc.).
+*   **`src/styles`**: The styling engine (Theme, StyleManager).
+*   **`src/utils`**: Helpers and validators.
+
+### **Running the Demos**
+
+This repository contains a showcase app with multiple demos (Todo, Forms, Routing).
+
+1.  **Clone the repo**:
+    ```bash
+    git clone https://github.com/lzif/markupless.git
+    cd markupless
+    ```
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    # or
+    bun install
+    ```
+3.  **Run the dev server**:
+    ```bash
+    npm run dev
+    # or
+    bun run dev
+    ```
+4.  Open your browser to `http://localhost:3000` (or whatever port Bun provides).
 
 ---
 
-## **📚 Dokumentasi**  
+## **📄 License**
 
-Lihat dokumentasi lengkap di [Markupless Docs](https://markupless.dev).  
+Markupless is released under the **MIT License**. You are free to use it for any project! ✌️
 
----
-
-## **💬 Komunitas & Dukungan**  
-
-Bergabung dengan komunitas kami untuk diskusi, tips, atau bantuan:  
-- 🌐 Website: [markupless.dev](https://markupless.dev)  
-- 🐦 Twitter: [@markupless_js](https://twitter.com/markupless_js)  
-- 💬 Discord: [Markupless Community](https://discord.gg/markupless)  
-
----
-
-## **📄 Lisensi**  
-
-Markupless dirilis di bawah lisensi **MIT**. Anda bebas menggunakannya untuk proyek apapun! ✌️  
-
-**Selamat coding dengan Markupless!** 🚀
+**Happy Coding with Markupless!** 🚀

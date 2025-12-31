@@ -9,7 +9,8 @@
     "out/*"
   ],
   "scripts": {
-    "dev": "bun run --watch example/index.html",
+    "dev": "bun run --watch examples/index.html",
+    "dev:build": "bun build examples/index.html --outdir=dist",
     "docs": "typedoc --entryPointStrategy Expand src",
     "prepublishOnly": "bun run build"
   },
