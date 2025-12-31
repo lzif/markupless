@@ -1,53 +1,54 @@
 {
-  "compilerOptions": {
-    // Target & Module
-    "target": "ES2022",
-    "module": "ESNext",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "moduleResolution": "node",
+	"compilerOptions": {
+		// Target & Module
+		"target": "ES2022",
+		"module": "ESNext",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"moduleResolution": "node",
+		"types": [],
 
-    // Paths & Base URL
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
+		// Paths & Base URL
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
 
-    // Strict Checking
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
+		// Strict Checking
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
 
-    // Additional Checks
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+		// Additional Checks
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
 
-    // Output Control
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "removeComments": true,
+		// Output Control
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"removeComments": true,
 
-    // Module Interop
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
+		// Module Interop
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
 
-    // Experimental
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+		// Experimental
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
 
-    // Advanced
-    "resolveJsonModule": true,
-    "skipLibCheck": true
-  },
-  "include": ["src/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
+		// Advanced
+		"resolveJsonModule": true,
+		"skipLibCheck": true
+	},
+	"include": ["src/**/*", "tests/**/*"],
+	"exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

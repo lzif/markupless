@@ -59,6 +59,9 @@ markupless-framework/
    - [x] Implementasi text elements (h1, h2, p)
    - [x] Implementasi container elements (section, div)
    - [x] Implementasi interactive elements (button)
+    - [x] Implementasi list elements (ul, ol, li)
+    - [x] Implementasi media elements (img, video, audio)
+    - [x] Implementasi table elements (table, tr, td)
    - [x] Tambahkan method `.with()` untuk komposisi
    - [x] Tambahkan method `.style()` untuk styling
    - [x] Tambahkan method `.onClick()` untuk event handling
@@ -92,7 +95,7 @@ markupless-framework/
    - [ ] Buat contoh penggunaan
 
 8. Testing
-   - [ ] Unit test untuk setiap modul
+   - [x] Unit test untuk setiap modul
    - [ ] Integration test
    - [ ] Performance benchmark
    - [ ] Uji kompatibilitas browser

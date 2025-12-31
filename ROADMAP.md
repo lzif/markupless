@@ -18,6 +18,9 @@
     - [x] Text elements (h1, h2, p)
     - [x] Container elements (section, div)
     - [x] Interactive elements (button, input)
+    - [x] List elements (ul, ol, li)
+    - [x] Media elements (img, video, audio)
+    - [x] Table elements (table, tr, td)
     - [x] `.with()` method
     - [x] `.style()` method
     - [x] `.onClick()` method
@@ -42,7 +45,7 @@
 ## Phase 6: Documentation & Testing
 - [ ] API Documentation
 - [ ] Usage examples
-- [ ] Unit tests
+- [x] Unit tests
 - [ ] Integration tests
 
 ## Phase 7: Publication
