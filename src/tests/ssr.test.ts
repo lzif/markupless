@@ -11,6 +11,10 @@ class MockElement extends BaseElement {
 
 describe("Server-Side Rendering (SSR)", () => {
 	it("should render components to string", () => {
+		// Reset singleton by creating a new app with a target.
+		document.body.innerHTML = '<div id="app-ssr-1"></div>';
+		app("#app-ssr-1");
+
 		const myApp = app();
 		const element = new MockElement("div").text("Hello World");
 		myApp.add(element);
@@ -20,6 +24,8 @@ describe("Server-Side Rendering (SSR)", () => {
 	});
 
 	it("should render nested components to string", () => {
+		document.body.innerHTML = '<div id="app-ssr-2"></div>';
+		app("#app-ssr-2");
 		const myApp = app();
 		const container = new MockElement("section");
 		const child1 = new MockElement("h1").text("Title");

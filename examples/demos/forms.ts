@@ -10,7 +10,7 @@ import {
 	span,
 	state,
 	validate,
-} from "../../src";
+} from "../../out";
 
 export const FormDemo = () => {
 	const formData = state({

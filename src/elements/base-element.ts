@@ -28,9 +28,9 @@ export class BaseElement {
 		this.isInBrowser =
 			(typeof window !== "undefined" && !!window.document) ||
 			// Check if we are in a test environment with DOM mocks
-			(typeof global !== "undefined" &&
-				!!(global as any).window &&
-				!!(global as any).document);
+			(typeof globalThis !== "undefined" && // This is always true, but safe
+				!!(globalThis as any).window &&
+				!!(globalThis as any).document);
 	}
 
 	/**

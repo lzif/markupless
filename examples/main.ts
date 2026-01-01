@@ -1,4 +1,4 @@
-import { app, button, div, h1, li, p, section, ul } from "../src";
+import { app, button, div, h1, li, p, section, ul } from "../out";
 import { FormDemo } from "./demos/forms";
 import { LoggerPlugin } from "./demos/plugins";
 import { PageOne, PageTwo } from "./demos/routing";

@@ -1,4 +1,4 @@
-import type { App, Plugin } from "../../src";
+import type { App, Plugin } from "../../out";
 
 export const LoggerPlugin: Plugin = {
 	name: "LoggerPlugin",

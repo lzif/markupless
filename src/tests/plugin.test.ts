@@ -4,6 +4,9 @@ import type { Plugin } from "@/core/plugin";
 
 describe("Plugin System", () => {
 	it("should register and install a plugin", () => {
+		// Reset app for this test
+		document.body.innerHTML = '<div id="app-test-1"></div>';
+		app("#app-test-1");
 		const myApp = app();
 		const installSpy = mock();
 
@@ -21,6 +24,9 @@ describe("Plugin System", () => {
 	});
 
 	it("should warn if plugin is already installed", () => {
+		// Reset app for this test
+		document.body.innerHTML = '<div id="app-test-2"></div>';
+		app("#app-test-2");
 		const myApp = app();
 		const consoleSpy = spyOn(console, "warn").mockImplementation(() => {});
 		const installSpy = mock();

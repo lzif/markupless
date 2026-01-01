@@ -8,7 +8,7 @@ import {
 	span,
 	state,
 	ul,
-} from "../../src";
+} from "../../out";
 
 export const TodoApp = () => {
 	const tasks = state<string[]>([]);

@@ -213,11 +213,22 @@ export class App {
 	}
 }
 
+let appInstance: App | null = null;
+
 /**
- * Helper function to create a new App instance.
- * @param target - The selector for the root element.
- * @returns A new App instance.
+ * Helper function to retrieve or create the App singleton.
+ * @param target - The selector for the root element. If provided, a new App instance is created and set as the singleton.
+ * @returns The App singleton instance.
  */
-export const app = (target?: string) => new App(target);
+export const app = (target?: string) => {
+	if (target) {
+		appInstance = new App(target);
+		return appInstance;
+	}
+	if (!appInstance) {
+		appInstance = new App();
+	}
+	return appInstance;
+};
 
 export default app;
