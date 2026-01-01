@@ -21,7 +21,59 @@ export class Router {
 				this.currentPath = window.location.pathname;
 				this.notify();
 			});
+			this.startClickInterception();
 		}
+	}
+
+	private startClickInterception() {
+		document.addEventListener("click", (event) => {
+			const anchor = (event.target as HTMLElement)?.closest("a");
+			if (!anchor) return;
+
+			// Ignore if modifier key is pressed or not left click
+			if (
+				event.ctrlKey ||
+				event.metaKey ||
+				event.altKey ||
+				event.shiftKey ||
+				event.button !== 0
+			) {
+				return;
+			}
+
+			const href = anchor.getAttribute("href");
+			const target = anchor.getAttribute("target");
+
+			// Skip if no href, hash link, or has target (e.g., _blank)
+			if (!href || href.startsWith("#") || target) return;
+
+			// Skip external links
+			let isExternal = false;
+			try {
+				const url = new URL(href, window.location.href);
+				if (url.origin !== window.location.origin) isExternal = true;
+			} catch {
+				// If href is not a valid URL (e.g., "javascript:"), ignore
+				return;
+			}
+
+			if (isExternal) return;
+
+			// Optional: allow bypassing router
+			if (
+				anchor.hasAttribute("data-no-router") ||
+				anchor.getAttribute("rel") === "external"
+			) {
+				return;
+			}
+
+			event.preventDefault();
+
+			const newPath = new URL(anchor.href, window.location.href).pathname;
+			if (newPath !== this.currentPath) {
+				this.navigate(newPath);
+			}
+		});
 	}
 
 	/**
