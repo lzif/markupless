@@ -1,4 +1,4 @@
-import { GlobalWindow } from 'happy-dom';
+import { GlobalWindow } from "happy-dom";
 
 const window = new GlobalWindow();
 // @ts-ignore
