@@ -1,7 +1,7 @@
-import { BaseElement } from "@/elements/base-element";
-import { state, State } from "@/core/state";
-import { Router, RouteHandler } from "@/core/router";
-import { Plugin } from "@/core/plugin";
+import type { Plugin } from "@/core/plugin";
+import { type RouteHandler, Router } from "@/core/router";
+import { type State, state } from "@/core/state";
+import type { BaseElement } from "@/elements/base-element";
 
 /**
  * The core application class for the Markupless framework.

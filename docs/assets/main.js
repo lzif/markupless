@@ -1,4 +1,3 @@
-"use strict";
 window.translations = {
 	copy: "Copy",
 	copied: "Copied!",
@@ -46,8 +45,8 @@ window.translations = {
 		e || t((e = { exports: {} }).exports, e), e.exports
 	);
 	var tt = (t, e, n, r) => {
-		if ((e && typeof e == "object") || typeof e == "function")
-			for (let i of Ze(e))
+		if ((e && typeof e === "object") || typeof e === "function")
+			for (const i of Ze(e))
 				!Ye.call(t, i) &&
 					i !== n &&
 					he(t, i, {
@@ -67,7 +66,7 @@ window.translations = {
 	);
 	var ye = et((me, ge) => {
 		(function () {
-			var t = function (e) {
+			var t = (e) => {
 				var n = new t.Builder();
 				return (
 					n.pipeline.add(t.trimmer, t.stopWordFilter, t.stemmer),
@@ -78,15 +77,11 @@ window.translations = {
 			};
 			t.version = "2.3.9";
 			(t.utils = {}),
-				(t.utils.warn = (function (e) {
-					return function (n) {
-						e.console && console.warn && console.warn(n);
-					};
+				(t.utils.warn = ((e) => (n) => {
+					e.console && console.warn && console.warn(n);
 				})(this)),
-				(t.utils.asString = function (e) {
-					return e == null ? "" : e.toString();
-				}),
-				(t.utils.clone = function (e) {
+				(t.utils.asString = (e) => (e == null ? "" : e.toString())),
+				(t.utils.clone = (e) => {
 					if (e == null) return e;
 					for (
 						var n = Object.create(null), r = Object.keys(e), i = 0;
@@ -100,9 +95,9 @@ window.translations = {
 							continue;
 						}
 						if (
-							typeof o == "string" ||
-							typeof o == "number" ||
-							typeof o == "boolean"
+							typeof o === "string" ||
+							typeof o === "number" ||
+							typeof o === "boolean"
 						) {
 							n[s] = o;
 							continue;
@@ -117,7 +112,7 @@ window.translations = {
 					(this.docRef = e), (this.fieldName = n), (this._stringValue = r);
 				}),
 				(t.FieldRef.joiner = "/"),
-				(t.FieldRef.fromString = function (e) {
+				(t.FieldRef.fromString = (e) => {
 					var n = e.indexOf(t.FieldRef.joiner);
 					if (n === -1) throw "malformed field ref string";
 					var r = e.slice(0, n),
@@ -139,26 +134,18 @@ window.translations = {
 				} else this.length = 0;
 			}),
 				(t.Set.complete = {
-					intersect: function (e) {
-						return e;
-					},
+					intersect: (e) => e,
 					union: function () {
 						return this;
 					},
-					contains: function () {
-						return !0;
-					},
+					contains: () => !0,
 				}),
 				(t.Set.empty = {
 					intersect: function () {
 						return this;
 					},
-					union: function (e) {
-						return e;
-					},
-					contains: function () {
-						return !1;
-					},
+					union: (e) => e,
+					contains: () => !1,
 				}),
 				(t.Set.prototype.contains = function (e) {
 					return !!this.elements[e];
@@ -189,9 +176,9 @@ window.translations = {
 									Object.keys(this.elements).concat(Object.keys(e.elements)),
 								);
 				}),
-				(t.idf = function (e, n) {
+				(t.idf = (e, n) => {
 					var r = 0;
-					for (var i in e) i != "_index" && (r += Object.keys(e[i]).length);
+					for (var i in e) i !== "_index" && (r += Object.keys(e[i]).length);
 					var s = (n - r + 0.5) / (r + 0.5);
 					return Math.log(1 + Math.abs(s));
 				}),
@@ -206,23 +193,17 @@ window.translations = {
 				}),
 				(t.Token.prototype.clone = function (e) {
 					return (
-						(e =
-							e ||
-							function (n) {
-								return n;
-							}),
+						(e = e || ((n) => n)),
 						new t.Token(e(this.str, this.metadata), this.metadata)
 					);
 				});
-			(t.tokenizer = function (e, n) {
+			(t.tokenizer = (e, n) => {
 				if (e == null || e == null) return [];
 				if (Array.isArray(e))
-					return e.map(function (f) {
-						return new t.Token(
-							t.utils.asString(f).toLowerCase(),
-							t.utils.clone(n),
-						);
-					});
+					return e.map(
+						(f) =>
+							new t.Token(t.utils.asString(f).toLowerCase(), t.utils.clone(n)),
+					);
 				for (
 					var r = e.toString().toLowerCase(),
 						i = r.length,
@@ -234,7 +215,7 @@ window.translations = {
 				) {
 					var c = r.charAt(o),
 						l = o - a;
-					if (c.match(t.tokenizer.separator) || o == i) {
+					if (c.match(t.tokenizer.separator) || o === i) {
 						if (l > 0) {
 							var d = t.utils.clone(n) || {};
 							(d.position = [a, l]),
@@ -246,14 +227,14 @@ window.translations = {
 				}
 				return s;
 			}),
-				(t.tokenizer.separator = /[\s\-]+/);
+				(t.tokenizer.separator = /[\s-]+/);
 			(t.Pipeline = function () {
 				this._stack = [];
 			}),
 				(t.Pipeline.registeredFunctions = Object.create(null)),
 				(t.Pipeline.registerFunction = function (e, n) {
 					n in this.registeredFunctions &&
-						t.utils.warn("Overwriting existing registered function: " + n),
+						t.utils.warn(`Overwriting existing registered function: ${n}`),
 						(e.label = n),
 						(t.Pipeline.registeredFunctions[e.label] = e);
 				}),
@@ -266,13 +247,13 @@ window.translations = {
 							e,
 						);
 				}),
-				(t.Pipeline.load = function (e) {
+				(t.Pipeline.load = (e) => {
 					var n = new t.Pipeline();
 					return (
-						e.forEach(function (r) {
+						e.forEach((r) => {
 							var i = t.Pipeline.registeredFunctions[r];
 							if (i) n.add(i);
-							else throw new Error("Cannot load unregistered function: " + r);
+							else throw new Error(`Cannot load unregistered function: ${r}`);
 						}),
 						n
 					);
@@ -286,18 +267,18 @@ window.translations = {
 				(t.Pipeline.prototype.after = function (e, n) {
 					t.Pipeline.warnIfFunctionNotRegistered(n);
 					var r = this._stack.indexOf(e);
-					if (r == -1) throw new Error("Cannot find existingFn");
+					if (r === -1) throw new Error("Cannot find existingFn");
 					(r = r + 1), this._stack.splice(r, 0, n);
 				}),
 				(t.Pipeline.prototype.before = function (e, n) {
 					t.Pipeline.warnIfFunctionNotRegistered(n);
 					var r = this._stack.indexOf(e);
-					if (r == -1) throw new Error("Cannot find existingFn");
+					if (r === -1) throw new Error("Cannot find existingFn");
 					this._stack.splice(r, 0, n);
 				}),
 				(t.Pipeline.prototype.remove = function (e) {
 					var n = this._stack.indexOf(e);
-					n != -1 && this._stack.splice(n, 1);
+					n !== -1 && this._stack.splice(n, 1);
 				}),
 				(t.Pipeline.prototype.run = function (e) {
 					for (var n = this._stack.length, r = 0; r < n; r++) {
@@ -314,46 +295,44 @@ window.translations = {
 				}),
 				(t.Pipeline.prototype.runString = function (e, n) {
 					var r = new t.Token(e, n);
-					return this.run([r]).map(function (i) {
-						return i.toString();
-					});
+					return this.run([r]).map((i) => i.toString());
 				}),
 				(t.Pipeline.prototype.reset = function () {
 					this._stack = [];
 				}),
 				(t.Pipeline.prototype.toJSON = function () {
-					return this._stack.map(function (e) {
-						return t.Pipeline.warnIfFunctionNotRegistered(e), e.label;
-					});
+					return this._stack.map(
+						(e) => (t.Pipeline.warnIfFunctionNotRegistered(e), e.label),
+					);
 				});
 			(t.Vector = function (e) {
 				(this._magnitude = 0), (this.elements = e || []);
 			}),
 				(t.Vector.prototype.positionForIndex = function (e) {
-					if (this.elements.length == 0) return 0;
+					if (this.elements.length === 0) return 0;
 					for (
 						var n = 0,
 							r = this.elements.length / 2,
 							i = r - n,
 							s = Math.floor(i / 2),
 							o = this.elements[s * 2];
-						i > 1 && (o < e && (n = s), o > e && (r = s), o != e);
+						i > 1 && (o < e && (n = s), o > e && (r = s), o !== e);
 					)
 						(i = r - n),
 							(s = n + Math.floor(i / 2)),
 							(o = this.elements[s * 2]);
-					if (o == e || o > e) return s * 2;
+					if (o === e || o > e) return s * 2;
 					if (o < e) return (s + 1) * 2;
 				}),
 				(t.Vector.prototype.insert = function (e, n) {
-					this.upsert(e, n, function () {
+					this.upsert(e, n, () => {
 						throw "duplicate index";
 					});
 				}),
 				(t.Vector.prototype.upsert = function (e, n, r) {
 					this._magnitude = 0;
 					var i = this.positionForIndex(e);
-					this.elements[i] == e
+					this.elements[i] === e
 						? (this.elements[i + 1] = r(this.elements[i + 1], n))
 						: this.elements.splice(i, 0, e, n);
 				}),
@@ -384,7 +363,7 @@ window.translations = {
 								? (l += 2)
 								: a > c
 									? (d += 2)
-									: a == c && ((n += r[l + 1] * i[d + 1]), (l += 2), (d += 2));
+									: a === c && ((n += r[l + 1] * i[d + 1]), (l += 2), (d += 2));
 					return n;
 				}),
 				(t.Vector.prototype.similarity = function (e) {
@@ -402,7 +381,7 @@ window.translations = {
 				(t.Vector.prototype.toJSON = function () {
 					return this.elements;
 				});
-			(t.stemmer = (function () {
+			(t.stemmer = (() => {
 				var e = {
 						ational: "ate",
 						tional: "tion",
@@ -437,12 +416,12 @@ window.translations = {
 					},
 					r = "[^aeiou]",
 					i = "[aeiouy]",
-					s = r + "[^aeiouy]*",
-					o = i + "[aeiou]*",
-					a = "^(" + s + ")?" + o + s,
-					c = "^(" + s + ")?" + o + s + "(" + o + ")?$",
-					l = "^(" + s + ")?" + o + s + o + s,
-					d = "^(" + s + ")?" + i,
+					s = `${r}[^aeiouy]*`,
+					o = `${i}[aeiou]*`,
+					a = `^(${s})?${o}${s}`,
+					c = `^(${s})?${o}${s}(${o})?$`,
+					l = `^(${s})?${o}${s}${o}${s}`,
+					d = `^(${s})?${i}`,
 					f = new RegExp(a),
 					p = new RegExp(l),
 					v = new RegExp(c),
@@ -453,8 +432,8 @@ window.translations = {
 					T = /^(.+?)(ed|ing)$/,
 					L = /.$/,
 					C = /(at|bl|iz)$/,
-					O = new RegExp("([^aeiouylsz])\\1$"),
-					j = new RegExp("^" + s + i + "[^aeiouwxy]$"),
+					O = /([^aeiouylsz])\1$/,
+					j = new RegExp(`^${s}${i}[^aeiouwxy]$`),
 					N = /^(.+?[^aeiou])y$/,
 					q =
 						/^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/,
@@ -464,13 +443,13 @@ window.translations = {
 					z = /^(.+?)(s|t)(ion)$/,
 					_ = /^(.+?)e$/,
 					U = /ll$/,
-					J = new RegExp("^" + s + i + "[^aeiouwxy]$"),
-					V = function (u) {
+					J = new RegExp(`^${s}${i}[^aeiouwxy]$`),
+					V = (u) => {
 						var y, P, k, h, E, Q, H;
 						if (u.length < 3) return u;
 						if (
 							((k = u.substr(0, 1)),
-							k == "y" && (u = k.toUpperCase() + u.substr(1)),
+							k === "y" && (u = k.toUpperCase() + u.substr(1)),
 							(h = w),
 							(E = m),
 							h.test(u)
@@ -492,14 +471,14 @@ window.translations = {
 									(Q = O),
 									(H = j),
 									E.test(u)
-										? (u = u + "e")
+										? (u = `${u}e`)
 										: Q.test(u)
 											? ((h = L), (u = u.replace(h, "")))
-											: H.test(u) && (u = u + "e"));
+											: H.test(u) && (u = `${u}e`));
 						}
 						if (((h = N), h.test(u))) {
 							var b = h.exec(u);
-							(y = b[1]), (u = y + "i");
+							(y = b[1]), (u = `${y}i`);
 						}
 						if (((h = q), h.test(u))) {
 							var b = h.exec(u);
@@ -528,20 +507,16 @@ window.translations = {
 							(h = U),
 							(E = p),
 							h.test(u) && E.test(u) && ((h = L), (u = u.replace(h, ""))),
-							k == "y" && (u = k.toLowerCase() + u.substr(1)),
+							k === "y" && (u = k.toLowerCase() + u.substr(1)),
 							u
 						);
 					};
-				return function (A) {
-					return A.update(V);
-				};
+				return (A) => A.update(V);
 			})()),
 				t.Pipeline.registerFunction(t.stemmer, "stemmer");
-			(t.generateStopWordFilter = function (e) {
-				var n = e.reduce(function (r, i) {
-					return (r[i] = i), r;
-				}, {});
-				return function (r) {
+			(t.generateStopWordFilter = (e) => {
+				var n = e.reduce((r, i) => ((r[i] = i), r), {});
+				return (r) => {
 					if (r && n[r.toString()] !== r.toString()) return r;
 				};
 			}),
@@ -667,11 +642,8 @@ window.translations = {
 					"your",
 				])),
 				t.Pipeline.registerFunction(t.stopWordFilter, "stopWordFilter");
-			(t.trimmer = function (e) {
-				return e.update(function (n) {
-					return n.replace(/^\W+/, "").replace(/\W+$/, "");
-				});
-			}),
+			(t.trimmer = (e) =>
+				e.update((n) => n.replace(/^\W+/, "").replace(/\W+$/, ""))),
 				t.Pipeline.registerFunction(t.trimmer, "trimmer");
 			(t.TokenSet = function () {
 				(this.final = !1),
@@ -680,7 +652,7 @@ window.translations = {
 					(t.TokenSet._nextId += 1);
 			}),
 				(t.TokenSet._nextId = 1),
-				(t.TokenSet.fromArray = function (e) {
+				(t.TokenSet.fromArray = (e) => {
 					for (
 						var n = new t.TokenSet.Builder(), r = 0, i = e.length;
 						r < i;
@@ -689,12 +661,11 @@ window.translations = {
 						n.insert(e[r]);
 					return n.finish(), n.root;
 				}),
-				(t.TokenSet.fromClause = function (e) {
-					return "editDistance" in e
+				(t.TokenSet.fromClause = (e) =>
+					"editDistance" in e
 						? t.TokenSet.fromFuzzyString(e.term, e.editDistance)
-						: t.TokenSet.fromString(e.term);
-				}),
-				(t.TokenSet.fromFuzzyString = function (e, n) {
+						: t.TokenSet.fromString(e.term)),
+				(t.TokenSet.fromFuzzyString = (e, n) => {
 					for (
 						var r = new t.TokenSet(),
 							i = [{ node: r, editsRemaining: n, str: e }];
@@ -707,21 +678,21 @@ window.translations = {
 							o in s.node.edges
 								? (a = s.node.edges[o])
 								: ((a = new t.TokenSet()), (s.node.edges[o] = a)),
-								s.str.length == 1 && (a.final = !0),
+								s.str.length === 1 && (a.final = !0),
 								i.push({
 									node: a,
 									editsRemaining: s.editsRemaining,
 									str: s.str.slice(1),
 								});
 						}
-						if (s.editsRemaining != 0) {
-							if ("*" in s.node.edges) var c = s.node.edges["*"];
+						if (s.editsRemaining !== 0) {
+							if ("*" in s.node.edges) var _c = s.node.edges["*"];
 							else {
 								var c = new t.TokenSet();
 								s.node.edges["*"] = c;
 							}
 							if (
-								(s.str.length == 0 && (c.final = !0),
+								(s.str.length === 0 && (c.final = !0),
 								i.push({
 									node: c,
 									editsRemaining: s.editsRemaining - 1,
@@ -733,15 +704,15 @@ window.translations = {
 										editsRemaining: s.editsRemaining - 1,
 										str: s.str.slice(1),
 									}),
-								s.str.length == 1 && (s.node.final = !0),
+								s.str.length === 1 && (s.node.final = !0),
 								s.str.length >= 1)
 							) {
-								if ("*" in s.node.edges) var l = s.node.edges["*"];
+								if ("*" in s.node.edges) var _l = s.node.edges["*"];
 								else {
 									var l = new t.TokenSet();
 									s.node.edges["*"] = l;
 								}
-								s.str.length == 1 && (l.final = !0),
+								s.str.length === 1 && (l.final = !0),
 									i.push({
 										node: l,
 										editsRemaining: s.editsRemaining - 1,
@@ -755,7 +726,7 @@ window.translations = {
 								f in s.node.edges
 									? (p = s.node.edges[f])
 									: ((p = new t.TokenSet()), (s.node.edges[f] = p)),
-									s.str.length == 1 && (p.final = !0),
+									s.str.length === 1 && (p.final = !0),
 									i.push({
 										node: p,
 										editsRemaining: s.editsRemaining - 1,
@@ -766,15 +737,15 @@ window.translations = {
 					}
 					return r;
 				}),
-				(t.TokenSet.fromString = function (e) {
+				(t.TokenSet.fromString = (e) => {
 					for (
 						var n = new t.TokenSet(), r = n, i = 0, s = e.length;
 						i < s;
 						i++
 					) {
 						var o = e[i],
-							a = i == s - 1;
-						if (o == "*") (n.edges[o] = n), (n.final = a);
+							a = i === s - 1;
+						if (o === "*") (n.edges[o] = n), (n.final = a);
 						else {
 							var c = new t.TokenSet();
 							(c.final = a), (n.edges[o] = c), (n = c);
@@ -830,7 +801,7 @@ window.translations = {
 						)
 							for (var d = s[l], f = 0; f < c; f++) {
 								var p = a[f];
-								if (p == d || d == "*") {
+								if (p === d || d === "*") {
 									var v = r.node.edges[p],
 										x = r.qNode.edges[d],
 										w = v.final && x.final,
@@ -861,12 +832,12 @@ window.translations = {
 						var i = 0;
 						i < e.length &&
 						i < this.previousWord.length &&
-						e[i] == this.previousWord[i];
+						e[i] === this.previousWord[i];
 						i++
 					)
 						r++;
 					this.minimize(r),
-						this.uncheckedNodes.length == 0
+						this.uncheckedNodes.length === 0
 							? (n = this.root)
 							: (n = this.uncheckedNodes[this.uncheckedNodes.length - 1].child);
 					for (var i = r; i < e.length; i++) {
@@ -899,7 +870,7 @@ window.translations = {
 					(this.pipeline = e.pipeline);
 			}),
 				(t.Index.prototype.search = function (e) {
-					return this.query(function (n) {
+					return this.query((n) => {
 						var r = new t.QueryParser(e, n);
 						r.parse();
 					});
@@ -946,24 +917,19 @@ window.translations = {
 									var g = l.fields[m],
 										j = C[g],
 										N = Object.keys(j),
-										q = L + "/" + g,
+										q = `${L}/${g}`,
 										W = new t.Set(N);
 									if (
-										(l.presence == t.Query.presence.REQUIRED &&
+										(l.presence === t.Query.presence.REQUIRED &&
 											((f = f.union(W)),
 											o[g] === void 0 && (o[g] = t.Set.complete)),
-										l.presence == t.Query.presence.PROHIBITED)
+										l.presence === t.Query.presence.PROHIBITED)
 									) {
 										a[g] === void 0 && (a[g] = t.Set.empty),
 											(a[g] = a[g].union(W));
 										continue;
 									}
-									if (
-										(i[g].upsert(O, l.boost, function (Ue, Je) {
-											return Ue + Je;
-										}),
-										!s[q])
-									) {
+									if ((i[g].upsert(O, l.boost, (Ue, Je) => Ue + Je), !s[q])) {
 										for (var B = 0; B < N.length; B++) {
 											var z = N[B],
 												_ = new t.FieldRef(z, g),
@@ -998,7 +964,7 @@ window.translations = {
 						u = Object.keys(this.fieldVectors);
 						for (var c = 0; c < u.length; c++) {
 							var _ = u[c],
-								k = t.FieldRef.fromString(_);
+								_k = t.FieldRef.fromString(_);
 							r[_] = new t.MatchData();
 						}
 					}
@@ -1017,9 +983,7 @@ window.translations = {
 							}
 						}
 					}
-					return y.sort(function (We, ze) {
-						return ze.score - We.score;
-					});
+					return y.sort((We, ze) => ze.score - We.score);
 				}),
 				(t.Index.prototype.toJSON = function () {
 					var e = Object.keys(this.invertedIndex)
@@ -1038,7 +1002,7 @@ window.translations = {
 						pipeline: this.pipeline.toJSON(),
 					};
 				}),
-				(t.Index.load = function (e) {
+				(t.Index.load = (e) => {
 					var n = {},
 						r = {},
 						i = e.fieldVectors,
@@ -1046,7 +1010,7 @@ window.translations = {
 						o = e.invertedIndex,
 						a = new t.TokenSet.Builder(),
 						c = t.Pipeline.load(e.pipeline);
-					e.version != t.version &&
+					e.version !== t.version &&
 						t.utils.warn(
 							"Version mismatch when loading serialised index. Current version of lunr '" +
 								t.version +
@@ -1097,9 +1061,7 @@ window.translations = {
 				}),
 				(t.Builder.prototype.field = function (e, n) {
 					if (/\//.test(e))
-						throw new RangeError(
-							"Field '" + e + "' contains illegal character '/'",
-						);
+						throw new RangeError(`Field '${e}' contains illegal character '/'`);
 					this._fields[e] = n || {};
 				}),
 				(t.Builder.prototype.b = function (e) {
@@ -1309,11 +1271,11 @@ window.translations = {
 						"usePipeline" in e || (e.usePipeline = !0),
 						"wildcard" in e || (e.wildcard = t.Query.wildcard.NONE),
 						e.wildcard & t.Query.wildcard.LEADING &&
-							e.term.charAt(0) != t.Query.wildcard &&
-							(e.term = "*" + e.term),
+							e.term.charAt(0) !== t.Query.wildcard &&
+							(e.term = `*${e.term}`),
 						e.wildcard & t.Query.wildcard.TRAILING &&
-							e.term.slice(-1) != t.Query.wildcard &&
-							(e.term = "" + e.term + "*"),
+							e.term.slice(-1) !== t.Query.wildcard &&
+							(e.term = `${e.term}*`),
 						"presence" in e || (e.presence = t.Query.presence.OPTIONAL),
 						this.clauses.push(e),
 						this
@@ -1321,7 +1283,7 @@ window.translations = {
 				}),
 				(t.Query.prototype.isNegated = function () {
 					for (var e = 0; e < this.clauses.length; e++)
-						if (this.clauses[e].presence != t.Query.presence.PROHIBITED)
+						if (this.clauses[e].presence !== t.Query.presence.PROHIBITED)
 							return !1;
 					return !0;
 				}),
@@ -1390,7 +1352,7 @@ window.translations = {
 					return this.pos - this.start;
 				}),
 				(t.QueryLexer.prototype.ignore = function () {
-					this.start == this.pos && (this.pos += 1), (this.start = this.pos);
+					this.start === this.pos && (this.pos += 1), (this.start = this.pos);
 				}),
 				(t.QueryLexer.prototype.backup = function () {
 					this.pos -= 1;
@@ -1399,7 +1361,7 @@ window.translations = {
 					var e, n;
 					do (e = this.next()), (n = e.charCodeAt(0));
 					while (n > 47 && n < 58);
-					e != t.QueryLexer.EOS && this.backup();
+					e !== t.QueryLexer.EOS && this.backup();
 				}),
 				(t.QueryLexer.prototype.more = function () {
 					return this.pos < this.length;
@@ -1410,15 +1372,13 @@ window.translations = {
 				(t.QueryLexer.EDIT_DISTANCE = "EDIT_DISTANCE"),
 				(t.QueryLexer.BOOST = "BOOST"),
 				(t.QueryLexer.PRESENCE = "PRESENCE"),
-				(t.QueryLexer.lexField = function (e) {
-					return (
-						e.backup(),
-						e.emit(t.QueryLexer.FIELD),
-						e.ignore(),
-						t.QueryLexer.lexText
-					);
-				}),
-				(t.QueryLexer.lexTerm = function (e) {
+				(t.QueryLexer.lexField = (e) => (
+					e.backup(),
+					e.emit(t.QueryLexer.FIELD),
+					e.ignore(),
+					t.QueryLexer.lexText
+				)),
+				(t.QueryLexer.lexTerm = (e) => {
 					if (
 						(e.width() > 1 && (e.backup(), e.emit(t.QueryLexer.TERM)),
 						e.ignore(),
@@ -1426,48 +1386,47 @@ window.translations = {
 					)
 						return t.QueryLexer.lexText;
 				}),
-				(t.QueryLexer.lexEditDistance = function (e) {
-					return (
-						e.ignore(),
-						e.acceptDigitRun(),
-						e.emit(t.QueryLexer.EDIT_DISTANCE),
-						t.QueryLexer.lexText
-					);
-				}),
-				(t.QueryLexer.lexBoost = function (e) {
-					return (
-						e.ignore(),
-						e.acceptDigitRun(),
-						e.emit(t.QueryLexer.BOOST),
-						t.QueryLexer.lexText
-					);
-				}),
-				(t.QueryLexer.lexEOS = function (e) {
+				(t.QueryLexer.lexEditDistance = (e) => (
+					e.ignore(),
+					e.acceptDigitRun(),
+					e.emit(t.QueryLexer.EDIT_DISTANCE),
+					t.QueryLexer.lexText
+				)),
+				(t.QueryLexer.lexBoost = (e) => (
+					e.ignore(),
+					e.acceptDigitRun(),
+					e.emit(t.QueryLexer.BOOST),
+					t.QueryLexer.lexText
+				)),
+				(t.QueryLexer.lexEOS = (e) => {
 					e.width() > 0 && e.emit(t.QueryLexer.TERM);
 				}),
 				(t.QueryLexer.termSeparator = t.tokenizer.separator),
-				(t.QueryLexer.lexText = function (e) {
+				(t.QueryLexer.lexText = (e) => {
 					for (;;) {
 						var n = e.next();
-						if (n == t.QueryLexer.EOS) return t.QueryLexer.lexEOS;
-						if (n.charCodeAt(0) == 92) {
+						if (n === t.QueryLexer.EOS) return t.QueryLexer.lexEOS;
+						if (n.charCodeAt(0) === 92) {
 							e.escapeCharacter();
 							continue;
 						}
-						if (n == ":") return t.QueryLexer.lexField;
-						if (n == "~")
+						if (n === ":") return t.QueryLexer.lexField;
+						if (n === "~")
 							return (
 								e.backup(),
 								e.width() > 0 && e.emit(t.QueryLexer.TERM),
 								t.QueryLexer.lexEditDistance
 							);
-						if (n == "^")
+						if (n === "^")
 							return (
 								e.backup(),
 								e.width() > 0 && e.emit(t.QueryLexer.TERM),
 								t.QueryLexer.lexBoost
 							);
-						if ((n == "+" && e.width() === 1) || (n == "-" && e.width() === 1))
+						if (
+							(n === "+" && e.width() === 1) ||
+							(n === "-" && e.width() === 1)
+						)
 							return e.emit(t.QueryLexer.PRESENCE), t.QueryLexer.lexText;
 						if (n.match(t.QueryLexer.termSeparator))
 							return t.QueryLexer.lexTerm;
@@ -1495,7 +1454,7 @@ window.translations = {
 					var e = this.currentClause;
 					this.query.clause(e), (this.currentClause = {});
 				}),
-				(t.QueryParser.parseClause = function (e) {
+				(t.QueryParser.parseClause = (e) => {
 					var n = e.peekLexeme();
 					if (n != null)
 						switch (n.type) {
@@ -1505,15 +1464,16 @@ window.translations = {
 								return t.QueryParser.parseField;
 							case t.QueryLexer.TERM:
 								return t.QueryParser.parseTerm;
-							default:
-								var r = "expected either a field or a term, found " + n.type;
+							default: {
+								var r = `expected either a field or a term, found ${n.type}`;
 								throw (
-									(n.str.length >= 1 && (r += " with value '" + n.str + "'"),
+									(n.str.length >= 1 && (r += ` with value '${n.str}'`),
 									new t.QueryParseError(r, n.start, n.end))
 								);
+							}
 						}
 				}),
-				(t.QueryParser.parsePresence = function (e) {
+				(t.QueryParser.parsePresence = (e) => {
 					var n = e.consumeLexeme();
 					if (n != null) {
 						switch (n.str) {
@@ -1523,9 +1483,10 @@ window.translations = {
 							case "+":
 								e.currentClause.presence = t.Query.presence.REQUIRED;
 								break;
-							default:
-								var r = "unrecognised presence operator'" + n.str + "'";
+							default: {
+								var r = `unrecognised presence operator'${n.str}'`;
 								throw new t.QueryParseError(r, n.start, n.end);
+							}
 						}
 						var i = e.peekLexeme();
 						if (i == null) {
@@ -1537,22 +1498,19 @@ window.translations = {
 								return t.QueryParser.parseField;
 							case t.QueryLexer.TERM:
 								return t.QueryParser.parseTerm;
-							default:
-								var r = "expecting term or field, found '" + i.type + "'";
+							default: {
+								var r = `expecting term or field, found '${i.type}'`;
 								throw new t.QueryParseError(r, i.start, i.end);
+							}
 						}
 					}
 				}),
-				(t.QueryParser.parseField = function (e) {
+				(t.QueryParser.parseField = (e) => {
 					var n = e.consumeLexeme();
 					if (n != null) {
-						if (e.query.allFields.indexOf(n.str) == -1) {
-							var r = e.query.allFields
-									.map(function (o) {
-										return "'" + o + "'";
-									})
-									.join(", "),
-								i = "unrecognised field '" + n.str + "', possible fields: " + r;
+						if (e.query.allFields.indexOf(n.str) === -1) {
+							var r = e.query.allFields.map((o) => `'${o}'`).join(", "),
+								i = `unrecognised field '${n.str}', possible fields: ${r}`;
 							throw new t.QueryParseError(i, n.start, n.end);
 						}
 						e.currentClause.fields = [n.str];
@@ -1564,17 +1522,18 @@ window.translations = {
 						switch (s.type) {
 							case t.QueryLexer.TERM:
 								return t.QueryParser.parseTerm;
-							default:
-								var i = "expecting term, found '" + s.type + "'";
+							default: {
+								var i = `expecting term, found '${s.type}'`;
 								throw new t.QueryParseError(i, s.start, s.end);
+							}
 						}
 					}
 				}),
-				(t.QueryParser.parseTerm = function (e) {
+				(t.QueryParser.parseTerm = (e) => {
 					var n = e.consumeLexeme();
 					if (n != null) {
 						(e.currentClause.term = n.str.toLowerCase()),
-							n.str.indexOf("*") != -1 && (e.currentClause.usePipeline = !1);
+							n.str.indexOf("*") !== -1 && (e.currentClause.usePipeline = !1);
 						var r = e.peekLexeme();
 						if (r == null) {
 							e.nextClause();
@@ -1591,17 +1550,18 @@ window.translations = {
 								return t.QueryParser.parseBoost;
 							case t.QueryLexer.PRESENCE:
 								return e.nextClause(), t.QueryParser.parsePresence;
-							default:
-								var i = "Unexpected lexeme type '" + r.type + "'";
+							default: {
+								var i = `Unexpected lexeme type '${r.type}'`;
 								throw new t.QueryParseError(i, r.start, r.end);
+							}
 						}
 					}
 				}),
-				(t.QueryParser.parseEditDistance = function (e) {
+				(t.QueryParser.parseEditDistance = (e) => {
 					var n = e.consumeLexeme();
 					if (n != null) {
 						var r = parseInt(n.str, 10);
-						if (isNaN(r)) {
+						if (Number.isNaN(r)) {
 							var i = "edit distance must be numeric";
 							throw new t.QueryParseError(i, n.start, n.end);
 						}
@@ -1622,17 +1582,18 @@ window.translations = {
 								return t.QueryParser.parseBoost;
 							case t.QueryLexer.PRESENCE:
 								return e.nextClause(), t.QueryParser.parsePresence;
-							default:
-								var i = "Unexpected lexeme type '" + s.type + "'";
+							default: {
+								var i = `Unexpected lexeme type '${s.type}'`;
 								throw new t.QueryParseError(i, s.start, s.end);
+							}
 						}
 					}
 				}),
-				(t.QueryParser.parseBoost = function (e) {
+				(t.QueryParser.parseBoost = (e) => {
 					var n = e.consumeLexeme();
 					if (n != null) {
 						var r = parseInt(n.str, 10);
-						if (isNaN(r)) {
+						if (Number.isNaN(r)) {
 							var i = "boost must be numeric";
 							throw new t.QueryParseError(i, n.start, n.end);
 						}
@@ -1653,21 +1614,20 @@ window.translations = {
 								return t.QueryParser.parseBoost;
 							case t.QueryLexer.PRESENCE:
 								return e.nextClause(), t.QueryParser.parsePresence;
-							default:
-								var i = "Unexpected lexeme type '" + s.type + "'";
+							default: {
+								var i = `Unexpected lexeme type '${s.type}'`;
 								throw new t.QueryParseError(i, s.start, s.end);
+							}
 						}
 					}
 				}),
-				(function (e, n) {
-					typeof define == "function" && define.amd
+				((e, n) => {
+					typeof define === "function" && define.amd
 						? define(n)
-						: typeof me == "object"
+						: typeof me === "object"
 							? (ge.exports = n())
 							: (e.lunr = n());
-				})(this, function () {
-					return t;
-				});
+				})(this, () => t);
 		})();
 	});
 	var M,
@@ -1781,7 +1741,7 @@ window.translations = {
 		}
 		scrollToHash() {
 			if (location.hash) {
-				let e = document.getElementById(location.hash.substring(1));
+				const e = document.getElementById(location.hash.substring(1));
 				if (!e) return;
 				e.scrollIntoView({ behavior: "instant", block: "start" });
 			}
@@ -1792,7 +1752,7 @@ window.translations = {
 			for (; n && !n.classList.contains(".tsd-navigation"); )
 				n instanceof HTMLDetailsElement && (n.open = !0), (n = n.parentElement);
 			if (e && !rt(e)) {
-				let r =
+				const r =
 					e.getBoundingClientRect().top -
 					document.documentElement.clientHeight / 4;
 				(document.querySelector(".site-menu").scrollTop = r),
@@ -1800,12 +1760,12 @@ window.translations = {
 			}
 		}
 		updateIndexVisibility() {
-			let e = document.querySelector(".tsd-index-content"),
+			const e = document.querySelector(".tsd-index-content"),
 				n = e?.open;
 			e && (e.open = !0),
 				document.querySelectorAll(".tsd-index-section").forEach((r) => {
 					r.style.display = "block";
-					let i = Array.from(r.querySelectorAll(".tsd-index-link")).every(
+					const i = Array.from(r.querySelectorAll(".tsd-index-link")).every(
 						(s) => s.offsetParent == null,
 					);
 					r.style.display = i ? "none" : "block";
@@ -1821,7 +1781,7 @@ window.translations = {
 				!location.hash)
 			)
 				return;
-			let e = document.getElementById(location.hash.substring(1));
+			const e = document.getElementById(location.hash.substring(1));
 			if (!e) return;
 			let n = e.parentElement;
 			for (; n && n.tagName !== "SECTION"; ) n = n.parentElement;
@@ -1832,7 +1792,7 @@ window.translations = {
 				i instanceof HTMLDetailsElement && (i.open = !0), (i = i.parentElement);
 			if (n.offsetParent == null) {
 				(this.alwaysVisibleMember = n), n.classList.add("always-visible");
-				let s = document.createElement("p");
+				const s = document.createElement("p");
 				s.classList.add("warning"),
 					(s.textContent = window.translations.normally_hidden),
 					n.prepend(s);
@@ -1861,7 +1821,7 @@ window.translations = {
 		}
 	};
 	function rt(t) {
-		let e = t.getBoundingClientRect(),
+		const e = t.getBoundingClientRect(),
 			n = Math.max(document.documentElement.clientHeight, window.innerHeight);
 		return !(e.bottom < 0 || e.top - n >= 0);
 	}
@@ -1873,7 +1833,7 @@ window.translations = {
 	};
 	var Ie = nt(ye(), 1);
 	async function R(t) {
-		let e = Uint8Array.from(atob(t), (s) => s.charCodeAt(0)),
+		const e = Uint8Array.from(atob(t), (s) => s.charCodeAt(0)),
 			r = new Blob([e])
 				.stream()
 				.pipeThrough(new DecompressionStream("deflate")),
@@ -1883,7 +1843,9 @@ window.translations = {
 	var Y = "closing",
 		ae = "tsd-overlay";
 	function it() {
-		let t = Math.abs(window.innerWidth - document.documentElement.clientWidth);
+		const t = Math.abs(
+			window.innerWidth - document.documentElement.clientWidth,
+		);
 		(document.body.style.overflow = "hidden"),
 			(document.body.style.paddingRight = `${t}px`);
 	}
@@ -1913,7 +1875,7 @@ window.translations = {
 	}
 	function Ee(t) {
 		if (t.open) return;
-		let e = document.createElement("div");
+		const e = document.createElement("div");
 		(e.id = ae), document.body.appendChild(e), t.showModal(), it();
 	}
 	function ve(t) {
@@ -1931,7 +1893,8 @@ window.translations = {
 	be.dataset.for = "filters";
 	var le = {};
 	function we(t) {
-		for (let e of t.split(/\s+/)) if (le.hasOwnProperty(e) && !le[e]) return !0;
+		for (const e of t.split(/\s+/))
+			if (Object.hasOwn(le, e) && !le[e]) return !0;
 		return !1;
 	}
 	var ee = class extends I {
@@ -1950,7 +1913,7 @@ window.translations = {
 				this.app.updateIndexVisibility();
 		}
 		fromLocalStorage() {
-			let e = S.getItem(this.key);
+			const e = S.getItem(this.key);
 			return e ? e === "true" : this.el.checked;
 		}
 		setLocalStorage(e) {
@@ -1969,11 +1932,11 @@ window.translations = {
 	var Le = 0;
 	async function Se(t, e) {
 		if (!window.searchData) return;
-		let n = await R(window.searchData);
+		const n = await R(window.searchData);
 		(t.data = n), (t.index = Ie.Index.load(n.index)), (e.innerHTML = "");
 	}
 	function _e() {
-		let t = document.getElementById("tsd-search-trigger"),
+		const t = document.getElementById("tsd-search-trigger"),
 			e = document.getElementById("tsd-search"),
 			n = document.getElementById("tsd-search-input"),
 			r = document.getElementById("tsd-search-results"),
@@ -1981,10 +1944,10 @@ window.translations = {
 			s = document.getElementById("tsd-search-status");
 		if (!(t && e && n && r && i && s))
 			throw new Error("Search controls missing");
-		let o = { base: document.documentElement.dataset.base };
+		const o = { base: document.documentElement.dataset.base };
 		o.base.endsWith("/") || (o.base += "/"),
 			i.addEventListener("error", () => {
-				let a = window.translations.search_index_not_available;
+				const a = window.translations.search_index_not_available;
 				Pe(s, a);
 			}),
 			i.addEventListener("load", () => {
@@ -1994,7 +1957,7 @@ window.translations = {
 			ot({ trigger: t, searchEl: e, results: r, field: n, status: s }, o);
 	}
 	function ot(t, e) {
-		let { field: n, results: r, searchEl: i, status: s, trigger: o } = t;
+		const { field: n, results: r, searchEl: i, status: s, trigger: o } = t;
 		xe(i, { closeOnClick: !0 });
 		function a() {
 			Ee(i), n.setSelectionRange(0, n.value.length);
@@ -2009,7 +1972,7 @@ window.translations = {
 			n.addEventListener("keydown", (l) => {
 				if (r.childElementCount === 0 || l.ctrlKey || l.metaKey || l.altKey)
 					return;
-				let d = n.getAttribute("aria-activedescendant"),
+				const d = n.getAttribute("aria-activedescendant"),
 					f = d ? document.getElementById(d) : null;
 				if (f) {
 					let p = !1,
@@ -2049,7 +2012,7 @@ window.translations = {
 			n.addEventListener("click", c),
 			document.body.addEventListener("keydown", (l) => {
 				if (l.altKey || l.metaKey || l.shiftKey) return;
-				let d = l.ctrlKey && l.key === "k",
+				const d = l.ctrlKey && l.key === "k",
 					f = !l.ctrlKey && !ut() && l.key === "/";
 				(d || f) && (l.preventDefault(), a());
 			});
@@ -2060,17 +2023,17 @@ window.translations = {
 		let i = e.value.trim(),
 			s;
 		if (i) {
-			let a = i
+			const a = i
 				.split(" ")
 				.map((c) => (c.length ? `*${c}*` : ""))
 				.join(" ");
 			s = r.index.search(a).filter(({ ref: c }) => {
-				let l = r.data.rows[Number(c)].classes;
+				const l = r.data.rows[Number(c)].classes;
 				return !l || !we(l);
 			});
 		} else s = [];
 		if (s.length === 0 && i) {
-			let a = window.translations.search_no_results_found_for_0.replace(
+			const a = window.translations.search_no_results_found_for_0.replace(
 				"{0}",
 				` "<strong>${te(i)}</strong>" `,
 			);
@@ -2086,7 +2049,7 @@ window.translations = {
 				(c.score *= d);
 		}
 		s.sort((a, c) => c.score - a.score);
-		let o = Math.min(10, s.length);
+		const o = Math.min(10, s.length);
 		for (let a = 0; a < o; a++) {
 			let c = r.data.rows[Number(s[a].ref)],
 				d = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon" aria-label="${window.translations[`kind_${c.kind}`].replaceAll('"', "&quot;")}"><use href="#icon-${c.icon || c.kind}"></use></svg>`,
@@ -2096,15 +2059,15 @@ window.translations = {
 				c.parent &&
 					(f = `<span class="parent">
                 ${Ce(c.parent, i)}.</span>${f}`);
-			let p = document.createElement("li");
+			const p = document.createElement("li");
 			(p.id = `tsd-search:${Le}-${a}`),
 				(p.role = "option"),
 				(p.ariaSelected = "false"),
 				(p.classList.value = c.classes ?? "");
-			let v = document.createElement("a");
+			const v = document.createElement("a");
 			(v.tabIndex = -1),
 				(v.href = r.base + c.url),
-				(v.innerHTML = d + `<span class="text">${f}</span>`),
+				(v.innerHTML = `${d}<span class="text">${f}</span>`),
 				p.append(v),
 				t.appendChild(p);
 		}
@@ -2128,7 +2091,7 @@ window.translations = {
 		}
 	}
 	function ke(t) {
-		let e = t.getAttribute("aria-activedescendant");
+		const e = t.getAttribute("aria-activedescendant");
 		(e ? document.getElementById(e) : null)?.setAttribute(
 			"aria-selected",
 			"false",
@@ -2142,7 +2105,7 @@ window.translations = {
 			i = [],
 			s = 0,
 			o = n.indexOf(r);
-		for (; o != -1; )
+		for (; o !== -1; )
 			i.push(
 				te(t.substring(s, o)),
 				`<mark>${te(t.substring(o, o + r.length))}</mark>`,
@@ -2176,7 +2139,7 @@ window.translations = {
 		"submit",
 	];
 	function ut() {
-		let t = document.activeElement;
+		const t = document.activeElement;
 		return t
 			? t.isContentEditable ||
 				t.tagName === "TEXTAREA" ||
@@ -2191,7 +2154,7 @@ window.translations = {
 		ne = { x: 0, y: 0 },
 		Qe = !1,
 		ce = !1,
-		dt = !1,
+		_dt = !1,
 		F = !1,
 		Oe = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 			navigator.userAgent,
@@ -2199,15 +2162,15 @@ window.translations = {
 	document.documentElement.classList.add(Oe ? "is-mobile" : "not-mobile");
 	Oe &&
 		"ontouchstart" in document.documentElement &&
-		((dt = !0), (D = "touchstart"), (Me = "touchmove"), ($ = "touchend"));
+		((_dt = !0), (D = "touchstart"), (Me = "touchmove"), ($ = "touchend"));
 	document.addEventListener(D, (t) => {
 		(ce = !0), (F = !1);
-		let e = D == "touchstart" ? t.targetTouches[0] : t;
+		const e = D === "touchstart" ? t.targetTouches[0] : t;
 		(ne.y = e.pageY || 0), (ne.x = e.pageX || 0);
 	});
 	document.addEventListener(Me, (t) => {
 		if (ce && !F) {
-			let e = D == "touchstart" ? t.targetTouches[0] : t,
+			const e = D === "touchstart" ? t.targetTouches[0] : t,
 				n = ne.x - (e.pageX || 0),
 				r = ne.y - (e.pageY || 0);
 			F = Math.sqrt(n * n + r * r) > 10;
@@ -2231,11 +2194,11 @@ window.translations = {
 				document.addEventListener($, (n) => this.onDocumentPointerUp(n));
 		}
 		setActive(e) {
-			if (this.active == e) return;
+			if (this.active === e) return;
 			(this.active = e),
-				document.documentElement.classList.toggle("has-" + this.className, e),
+				document.documentElement.classList.toggle(`has-${this.className}`, e),
 				this.el.classList.toggle("active", e);
-			let n = (this.active ? "to-has-" : "from-has-") + this.className;
+			const n = (this.active ? "to-has-" : "from-has-") + this.className;
 			document.documentElement.classList.add(n),
 				setTimeout(() => document.documentElement.classList.remove(n), 500);
 		}
@@ -2250,11 +2213,11 @@ window.translations = {
 		}
 		onDocumentPointerUp(e) {
 			if (!F && this.active && e.target.closest(".col-sidebar")) {
-				let n = e.target.closest("a");
+				const n = e.target.closest("a");
 				if (n) {
 					let r = window.location.href;
-					r.indexOf("#") != -1 && (r = r.substring(0, r.indexOf("#"))),
-						n.href.substring(0, r.length) == r &&
+					r.indexOf("#") !== -1 && (r = r.substring(0, r.indexOf("#"))),
+						n.href.substring(0, r.length) === r &&
 							setTimeout(() => this.setActive(!1), 250);
 				}
 			}
@@ -2276,24 +2239,23 @@ window.translations = {
 					});
 			}
 			toggle(e) {
-				for (let n of this.accordions) n.open = e;
+				for (const n of this.accordions) n.open = e;
 				S.setItem(this.key, e.toString());
 			}
 		},
 		ie = class extends I {
 			constructor(e) {
 				super(e);
-				let n = this.el.querySelector("summary"),
+				const n = this.el.querySelector("summary"),
 					r = n.querySelector("a");
-				r &&
-					r.addEventListener("click", () => {
-						location.assign(r.href);
-					});
+				r?.addEventListener("click", () => {
+					location.assign(r.href);
+				});
 				let i = `tsd-accordion-${n.dataset.key ?? n.textContent.trim().replace(/\s+/g, "-").toLowerCase()}`,
 					s;
 				if (ue.has(i)) s = ue.get(i);
 				else {
-					let o = S.getItem(i),
+					const o = S.getItem(i),
 						a = o ? o === "true" : this.el.open;
 					(s = new de(i, a)), ue.set(i, s);
 				}
@@ -2301,7 +2263,7 @@ window.translations = {
 			}
 		};
 	function He(t) {
-		let e = S.getItem("tsd-theme") || "os";
+		const e = S.getItem("tsd-theme") || "os";
 		(t.value = e),
 			Ae(e),
 			t.addEventListener("change", () => {
@@ -2313,43 +2275,43 @@ window.translations = {
 	}
 	var se;
 	function Ne() {
-		let t = document.getElementById("tsd-nav-script");
+		const t = document.getElementById("tsd-nav-script");
 		t && (t.addEventListener("load", Re), Re());
 	}
 	async function Re() {
-		let t = document.getElementById("tsd-nav-container");
+		const t = document.getElementById("tsd-nav-container");
 		if (!t || !window.navigationData) return;
-		let e = await R(window.navigationData);
+		const e = await R(window.navigationData);
 		(se = document.documentElement.dataset.base),
 			se.endsWith("/") || (se += "/"),
 			(t.innerHTML = "");
-		for (let n of e) Be(n, t, []);
+		for (const n of e) Be(n, t, []);
 		window.app.createComponents(t),
 			window.app.showPage(),
 			window.app.ensureActivePageVisible();
 	}
 	function Be(t, e, n) {
-		let r = e.appendChild(document.createElement("li"));
+		const r = e.appendChild(document.createElement("li"));
 		if (t.children) {
-			let i = [...n, t.text],
+			const i = [...n, t.text],
 				s = r.appendChild(document.createElement("details"));
 			s.className = t.class ? `${t.class} tsd-accordion` : "tsd-accordion";
-			let o = s.appendChild(document.createElement("summary"));
+			const o = s.appendChild(document.createElement("summary"));
 			(o.className = "tsd-accordion-summary"),
 				(o.dataset.key = i.join("$")),
 				(o.innerHTML =
 					'<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>'),
 				De(t, o);
-			let a = s.appendChild(document.createElement("div"));
+			const a = s.appendChild(document.createElement("div"));
 			a.className = "tsd-accordion-details";
-			let c = a.appendChild(document.createElement("ul"));
+			const c = a.appendChild(document.createElement("ul"));
 			c.className = "tsd-nested-navigation";
-			for (let l of t.children) Be(l, c, i);
+			for (const l of t.children) Be(l, c, i);
 		} else De(t, r, t.class);
 	}
 	function De(t, e, n) {
 		if (t.path) {
-			let r = e.appendChild(document.createElement("a"));
+			const r = e.appendChild(document.createElement("a"));
 			if (
 				((r.href = se + t.path),
 				n && (r.className = n),
@@ -2358,19 +2320,22 @@ window.translations = {
 					(r.classList.add("current"), (r.ariaCurrent = "page")),
 				t.kind)
 			) {
-				let i = window.translations[`kind_${t.kind}`].replaceAll('"', "&quot;");
+				const i = window.translations[`kind_${t.kind}`].replaceAll(
+					'"',
+					"&quot;",
+				);
 				r.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon" aria-label="${i}"><use href="#icon-${t.icon || t.kind}"></use></svg>`;
 			}
 			r.appendChild(Fe(t.text, document.createElement("span")));
 		} else {
-			let r = e.appendChild(document.createElement("span")),
+			const r = e.appendChild(document.createElement("span")),
 				i = window.translations.folder.replaceAll('"', "&quot;");
 			(r.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon" aria-label="${i}"><use href="#icon-folder"></use></svg>`),
 				r.appendChild(Fe(t.text, document.createElement("span")));
 		}
 	}
 	function Fe(t, e) {
-		let n = t.split(
+		const n = t.split(
 			/(?<=[^A-Z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[_-])(?=[^_-])/,
 		);
 		for (let r = 0; r < n.length; ++r)
@@ -2388,32 +2353,32 @@ window.translations = {
 	function ht() {
 		document.addEventListener("click", (r) => {
 			let i = r.target;
-			for (; i.parentElement && i.parentElement.tagName != "LI"; )
+			for (; i.parentElement && i.parentElement.tagName !== "LI"; )
 				i = i.parentElement;
 			i.dataset.dropdown &&
 				(i.dataset.dropdown = String(i.dataset.dropdown !== "true"));
 		});
-		let t = new Map(),
+		const t = new Map(),
 			e = new Set();
-		for (let r of document.querySelectorAll(
+		for (const r of document.querySelectorAll(
 			".tsd-full-hierarchy [data-refl]",
 		)) {
-			let i = r.querySelector("ul");
+			const i = r.querySelector("ul");
 			t.has(r.dataset.refl)
 				? e.add(r.dataset.refl)
 				: i && t.set(r.dataset.refl, i);
 		}
-		for (let r of e) n(r);
+		for (const r of e) n(r);
 		function n(r) {
-			let i = t.get(r).cloneNode(!0);
+			const i = t.get(r).cloneNode(!0);
 			i.querySelectorAll("[id]").forEach((s) => {
 				s.removeAttribute("id");
 			}),
 				i.querySelectorAll("[data-dropdown]").forEach((s) => {
 					s.dataset.dropdown = "false";
 				});
-			for (let s of document.querySelectorAll(`[data-refl="${r}"]`)) {
-				let o = gt(),
+			for (const s of document.querySelectorAll(`[data-refl="${r}"]`)) {
+				const o = gt(),
 					a = s.querySelector("ul");
 				s.insertBefore(o, a),
 					(o.dataset.dropdown = String(!!a)),
@@ -2422,23 +2387,23 @@ window.translations = {
 		}
 	}
 	function pt() {
-		let t = document.getElementById("tsd-hierarchy-script");
+		const t = document.getElementById("tsd-hierarchy-script");
 		t && (t.addEventListener("load", Ve), Ve());
 	}
 	async function Ve() {
-		let t = document.querySelector(".tsd-panel.tsd-hierarchy:has(h4 a)");
+		const t = document.querySelector(".tsd-panel.tsd-hierarchy:has(h4 a)");
 		if (!t || !window.hierarchyData) return;
-		let e = +t.dataset.refl,
+		const e = +t.dataset.refl,
 			n = await R(window.hierarchyData),
 			r = t.querySelector("ul"),
 			i = document.createElement("ul");
 		if (
 			(i.classList.add("tsd-hierarchy"),
 			ft(i, n, e),
-			r.querySelectorAll("li").length == i.querySelectorAll("li").length)
+			r.querySelectorAll("li").length === i.querySelectorAll("li").length)
 		)
 			return;
-		let s = document.createElement("span");
+		const s = document.createElement("span");
 		s.classList.add("tsd-hierarchy-toggle"),
 			(s.textContent = window.translations.hierarchy_expand),
 			t.querySelector("h4 a")?.insertAdjacentElement("afterend", s),
@@ -2454,36 +2419,36 @@ window.translations = {
 			});
 	}
 	function ft(t, e, n) {
-		let r = e.roots.filter((i) => mt(e, i, n));
-		for (let i of r) t.appendChild(je(e, i, n));
+		const r = e.roots.filter((i) => mt(e, i, n));
+		for (const i of r) t.appendChild(je(e, i, n));
 	}
 	function je(t, e, n, r = new Set()) {
 		if (r.has(e)) return;
 		r.add(e);
-		let i = t.reflections[e],
+		const i = t.reflections[e],
 			s = document.createElement("li");
 		if ((s.classList.add("tsd-hierarchy-item"), e === n)) {
-			let o = s.appendChild(document.createElement("span"));
+			const o = s.appendChild(document.createElement("span"));
 			(o.textContent = i.name), o.classList.add("tsd-hierarchy-target");
 		} else {
-			for (let a of i.uniqueNameParents || []) {
-				let c = t.reflections[a],
+			for (const a of i.uniqueNameParents || []) {
+				const c = t.reflections[a],
 					l = s.appendChild(document.createElement("a"));
 				(l.textContent = c.name),
 					(l.href = oe + c.url),
-					(l.className = c.class + " tsd-signature-type"),
+					(l.className = `${c.class} tsd-signature-type`),
 					s.append(document.createTextNode("."));
 			}
-			let o = s.appendChild(document.createElement("a"));
+			const o = s.appendChild(document.createElement("a"));
 			(o.textContent = t.reflections[e].name),
 				(o.href = oe + i.url),
-				(o.className = i.class + " tsd-signature-type");
+				(o.className = `${i.class} tsd-signature-type`);
 		}
 		if (i.children) {
-			let o = s.appendChild(document.createElement("ul"));
+			const o = s.appendChild(document.createElement("ul"));
 			o.classList.add("tsd-hierarchy");
-			for (let a of i.children) {
-				let c = je(t, a, n, r);
+			for (const a of i.children) {
+				const c = je(t, a, n, r);
 				c && o.appendChild(c);
 			}
 		}
@@ -2491,13 +2456,13 @@ window.translations = {
 	}
 	function mt(t, e, n) {
 		if (e === n) return !0;
-		let r = new Set(),
+		const r = new Set(),
 			i = [t.reflections[e]];
 		for (; i.length; ) {
-			let s = i.pop();
+			const s = i.pop();
 			if (!r.has(s)) {
 				r.add(s);
-				for (let o of s.children || []) {
+				for (const o of s.children || []) {
 					if (o === n) return !0;
 					i.push(t.reflections[o]);
 				}
@@ -2506,7 +2471,7 @@ window.translations = {
 		return !1;
 	}
 	function gt() {
-		let t = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		const t = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 		return (
 			t.setAttribute("width", "20"),
 			t.setAttribute("height", "20"),

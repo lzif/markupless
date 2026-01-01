@@ -383,7 +383,7 @@
 
 	.always-visible,
 	.always-visible .tsd-signatures {
-		display: inherit !important;
+		display: inherit;
 	}
 
 	h1,
@@ -860,7 +860,7 @@
 		padding-left: 1.5rem;
 	}
 	.tsd-full-hierarchy a {
-		padding: 0.25rem 0 !important;
+		padding: 0.25rem 0;
 		font-size: 1rem;
 		display: inline-flex;
 		align-items: center;
@@ -1017,7 +1017,7 @@
 	}
 
 	a.tsd-index-link {
-		padding: 0.25rem 0 !important;
+		padding: 0.25rem 0;
 		font-size: 1rem;
 		line-height: 1.25rem;
 		display: inline-flex;
@@ -1383,7 +1383,7 @@
 	}
 
 	.deprecated {
-		text-decoration: line-through !important;
+		text-decoration: line-through;
 	}
 
 	.warning {
@@ -1484,14 +1484,14 @@
 			width: 100%;
 		}
 		.col-sidebar {
-			position: fixed !important;
+			position: fixed;
 			overflow-y: auto;
 			-webkit-overflow-scrolling: touch;
 			z-index: 1024;
-			top: 0 !important;
-			bottom: 0 !important;
-			left: auto !important;
-			right: 0 !important;
+			top: 0;
+			bottom: 0;
+			left: auto;
+			right: 0;
 			padding: 1.5rem 1.5rem 0 0;
 			width: 75vw;
 			visibility: hidden;

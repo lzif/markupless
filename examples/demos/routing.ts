@@ -1,4 +1,4 @@
-import { div, h1, p, button, app } from "../../src";
+import { app, button, div, h1, p } from "../../src";
 
 export const PageOne = () =>
 	div()

@@ -3,11 +3,7 @@ import { BaseElement } from "./base-element";
 /**
  * Base class for interactive elements like buttons and inputs.
  */
-export class InteractiveElement extends BaseElement {
-	constructor(tagName: string) {
-		super(tagName);
-	}
-}
+export class InteractiveElement extends BaseElement {}
 
 /**
  * Represents an `<input>` element.

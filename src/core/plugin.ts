@@ -1,4 +1,4 @@
-import { App } from "@/core/app";
+import type { App } from "@/core/app";
 
 /**
  * Interface for defining a plugin.

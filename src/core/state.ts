@@ -20,7 +20,7 @@ export interface State<T> {
  * count.value++; // Logs 1
  */
 export function state<T>(initialValue: T): State<T> {
-	let value = initialValue;
+	const value = initialValue;
 	const dependents = new Set<() => void>();
 
 	const proxy = new Proxy(

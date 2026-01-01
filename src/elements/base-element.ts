@@ -1,6 +1,6 @@
-import { effect, State } from "@/core/state";
-import { StyleObject } from "@/styles/types";
+import { effect, type State } from "@/core/state";
 import { StyleManager } from "@/styles/style-manager";
+import type { StyleObject } from "@/styles/types";
 
 /**
  * Base class for all elements in the framework.
@@ -147,7 +147,7 @@ export class BaseElement {
 	 * div().style({ color: "red", fontSize: "16px" });
 	 */
 	style(styles: Partial<CSSStyleDeclaration>): this {
-		this.attributes["style"] = Object.entries(styles)
+		this.attributes.style = Object.entries(styles)
 			.map(([key, value]) => `${key}: ${value}`)
 			.join("; ");
 		return this;
@@ -161,8 +161,8 @@ export class BaseElement {
 	 */
 	css(styles: StyleObject): this {
 		const className = StyleManager.getInstance().inject(styles);
-		const existingClass = this.attributes["class"] || "";
-		this.attributes["class"] = existingClass
+		const existingClass = this.attributes.class || "";
+		this.attributes.class = existingClass
 			? `${existingClass} ${className}`
 			: className;
 		return this;
@@ -174,8 +174,8 @@ export class BaseElement {
 	 * @returns The element instance for chaining.
 	 */
 	class(className: string): this {
-		const existingClass = this.attributes["class"] || "";
-		this.attributes["class"] = existingClass
+		const existingClass = this.attributes.class || "";
+		this.attributes.class = existingClass
 			? `${existingClass} ${className}`
 			: className;
 		return this;
@@ -276,7 +276,7 @@ export class BaseElement {
 			});
 			const attributesString = attributesArray.join(" ");
 
-			const startTag = `<${this.tagName}${attributesString ? " " + attributesString : ""}>`;
+			const startTag = `<${this.tagName}${attributesString ? ` ${attributesString}` : ""}>`;
 
 			let childrenHTML = "";
 

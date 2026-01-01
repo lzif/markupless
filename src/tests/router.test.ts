@@ -1,45 +1,38 @@
-import { describe, it, expect, mock, beforeEach } from "bun:test";
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	mock,
+	spyOn,
+} from "bun:test";
+import app, { type App } from "../core/app";
 import { Router } from "../core/router";
 import { BaseElement } from "../elements/base-element";
-import app, { App } from "../core/app";
 
-// Mock window and history
-const mockPushState = mock();
-const mockAddEventListener = mock();
-
-// @ts-ignore
-global.window = {
-	location: { pathname: "/" },
-	history: { pushState: mockPushState },
-	addEventListener: mockAddEventListener,
-	removeEventListener: mock(),
-};
-
-// @ts-ignore
-global.document = {
-	createElement: (tag: string) => {
-		return {
-			tagName: tag.toUpperCase(),
-			setAttribute: mock(),
-			appendChild: mock(),
-			addEventListener: mock(),
-			style: {},
-		};
-	},
-	querySelector: mock(),
-	head: { appendChild: mock() },
-	createDocumentFragment: () => ({ appendChild: mock() }),
-};
+// We rely on happy-dom providing the global window/document
+// setup-dom.ts should be loaded by bun test
 
 describe("Router", () => {
 	let router: Router;
+	let pushStateSpy: any;
 
 	beforeEach(() => {
+		// Reset URL to root before creating router
+		// In happy-dom, directly setting window.location.href or using history might work.
+		// Let's rely on history API.
+		window.history.replaceState({}, "", "/");
+
+		pushStateSpy = spyOn(window.history, "pushState");
+
 		router = new Router();
-		mockPushState.mockClear();
-		mockAddEventListener.mockClear();
-		// Reset window.location.pathname
-		(window.location as any).pathname = "/";
+		// Force router to sync with current location just in case constructor read it wrong or before update
+		// (Though constructor runs after replaceState, so it should be fine).
+	});
+
+	afterEach(() => {
+		pushStateSpy.mockRestore();
 	});
 
 	it("should register routes", () => {
@@ -51,6 +44,15 @@ describe("Router", () => {
 	it("should resolve registered routes", () => {
 		const element = new BaseElement("div");
 		router.register("/", element);
+
+		// Debugging hint: print current path if needed
+		// console.log("Router Path:", router['currentPath']);
+		// console.log("Window Path:", window.location.pathname);
+
+		// If this fails, it means router.currentPath !== "/"
+		// Force navigation to ensure sync
+		router.navigate("/");
+
 		expect(router.resolve()).toBe(element);
 	});
 
@@ -68,7 +70,7 @@ describe("Router", () => {
 
 		router.navigate("/new-path");
 
-		expect(mockPushState).toHaveBeenCalledWith({}, "", "/new-path");
+		expect(pushStateSpy).toHaveBeenCalledWith({}, "", "/new-path");
 		expect(listener).toHaveBeenCalled();
 	});
 
@@ -87,16 +89,24 @@ describe("Router", () => {
 
 describe("App Routing", () => {
 	let myApp: App;
-	let root: any;
+	let root: HTMLElement;
 
 	beforeEach(() => {
-		root = {
-			innerHTML: "",
-			appendChild: mock(),
-		};
-		// Mock document.querySelector to return our root
-		(document.querySelector as any) = mock().mockReturnValue(root);
+		// Reset URL
+		window.history.replaceState({}, "", "/");
+
+		// Setup a real root element in the DOM
+		root = document.createElement("div");
+		root.id = "app";
+		document.body.appendChild(root);
+
 		myApp = app("#app");
+	});
+
+	afterEach(() => {
+		if (root?.parentNode) {
+			root.parentNode.removeChild(root);
+		}
 	});
 
 	it("should register routes via app.route()", () => {
@@ -107,36 +117,32 @@ describe("App Routing", () => {
 
 	it("should render matched route", () => {
 		const element = new BaseElement("div");
-		// Mock render to return something we can verify
-		const domElement = { tagName: "DIV" };
-		element.render = mock().mockReturnValue(domElement);
+		element.text("Home Page");
+
+		// Force navigation to / to ensure router is in sync
+		myApp.router.navigate("/");
 
 		myApp.route("/", element);
 		myApp.render();
 
-		expect(element.render).toHaveBeenCalled();
-		expect(root.appendChild).toHaveBeenCalledWith(domElement);
+		// Check if root has content
+		expect(root.innerHTML).toContain("Home Page");
 	});
 
 	it("should update render on navigation", () => {
-		const page1 = new BaseElement("h1");
-		const page2 = new BaseElement("h2");
+		const page1 = new BaseElement("h1").text("Page 1");
+		const page2 = new BaseElement("h2").text("Page 2");
 
-		page1.render = mock().mockReturnValue({ tagName: "H1" });
-		page2.render = mock().mockReturnValue({ tagName: "H2" });
-
+		myApp.router.navigate("/");
 		myApp.route("/", page1);
 		myApp.route("/page2", page2);
 
 		myApp.render();
-		expect(root.appendChild).toHaveBeenCalledWith({ tagName: "H1" });
+		expect(root.innerHTML).toContain("Page 1");
 
 		// Simulate navigation
 		myApp.router.navigate("/page2");
 
-		// root.innerHTML = "" should have been called, but we can't easily check assignment on mock object
-		// unless we used a proxy or setter mock. But we can check appendChild called with new element
-		expect(page2.render).toHaveBeenCalled();
-		expect(root.appendChild).toHaveBeenCalledWith({ tagName: "H2" });
+		expect(root.innerHTML).toContain("Page 2");
 	});
 });

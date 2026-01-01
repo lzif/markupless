@@ -3,11 +3,7 @@ import { BaseElement } from "./base-element";
 /**
  * Represents a container element used for layout and grouping.
  */
-export class ContainerElement extends BaseElement {
-	constructor(tagName: string) {
-		super(tagName);
-	}
-}
+export class ContainerElement extends BaseElement {}
 
 /** Creates a `<div>` element. */
 export const div = () => new ContainerElement("div");

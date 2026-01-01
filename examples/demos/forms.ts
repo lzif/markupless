@@ -1,15 +1,15 @@
 import {
-	section,
-	h2,
-	div,
-	input,
 	button,
-	state,
-	span,
-	validate,
-	required,
+	div,
 	email,
+	h2,
+	input,
 	minLength,
+	required,
+	section,
+	span,
+	state,
+	validate,
 } from "../../src";
 
 export const FormDemo = () => {

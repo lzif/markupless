@@ -3,11 +3,7 @@ import { BaseElement } from "./base-element";
 /**
  * Base class for media elements (img, video, audio).
  */
-export class MediaElement extends BaseElement {
-	constructor(tagName: string) {
-		super(tagName);
-	}
-}
+export class MediaElement extends BaseElement {}
 
 /**
  * Represents an `<img>` element.

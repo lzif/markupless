@@ -1,6 +1,6 @@
-import { describe, it, expect } from "bun:test";
-import { BaseElement } from "../base-element";
+import { describe, expect, it } from "bun:test";
 import { state } from "../../core/state";
+import { BaseElement } from "../base-element";
 
 describe("BaseElement State Binding", () => {
 	it("should update text content when state changes", () => {

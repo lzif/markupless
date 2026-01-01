@@ -5,7 +5,7 @@ type ThemeConfig = { [key: string]: ThemeValue | ThemeConfig };
 
 // Helper to flatten object to paths
 function flattenTheme(obj: ThemeConfig, prefix = ""): Record<string, string> {
-	let result: Record<string, string> = {};
+	const result: Record<string, string> = {};
 
 	for (const key in obj) {
 		const value = obj[key];

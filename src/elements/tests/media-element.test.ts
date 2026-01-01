@@ -1,10 +1,10 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import {
-	img,
-	video,
 	audio,
 	ImageElement,
+	img,
 	MediaElement,
+	video,
 } from "../media-element";
 
 describe("Media Elements", () => {

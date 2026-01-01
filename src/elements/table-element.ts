@@ -3,11 +3,7 @@ import { BaseElement } from "./base-element";
 /**
  * Represents a table-related element.
  */
-export class TableElement extends BaseElement {
-	constructor(tagName: string) {
-		super(tagName);
-	}
-}
+export class TableElement extends BaseElement {}
 
 /** Creates a `<table>` element. */
 export const table = () => new TableElement("table");

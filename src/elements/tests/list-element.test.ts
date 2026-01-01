@@ -1,5 +1,5 @@
-import { describe, it, expect } from "bun:test";
-import { ul, ol, li, ListElement, ListItemElement } from "../list-element";
+import { describe, expect, it } from "bun:test";
+import { ListElement, ListItemElement, li, ol, ul } from "../list-element";
 
 describe("List Elements", () => {
 	it("should create unordered list", () => {

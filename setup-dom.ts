@@ -1,21 +1,21 @@
 import { GlobalWindow } from "happy-dom";
 
 const window = new GlobalWindow();
-// @ts-ignore
+// @ts-expect-error
 global.window = window;
-// @ts-ignore
+// @ts-expect-error
 global.document = window.document;
-// @ts-ignore
+// @ts-expect-error
 global.HTMLElement = window.HTMLElement;
-// @ts-ignore
+// @ts-expect-error
 global.Node = window.Node;
-// @ts-ignore
+// @ts-expect-error
 global.Text = window.Text;
-// @ts-ignore
+// @ts-expect-error
 global.Element = window.Element;
-// @ts-ignore
+// @ts-expect-error
 global.HTMLImageElement = window.HTMLImageElement;
-// @ts-ignore
+// @ts-expect-error
 global.HTMLVideoElement = window.HTMLVideoElement;
-// @ts-ignore
+// @ts-expect-error
 global.HTMLAudioElement = window.HTMLAudioElement;

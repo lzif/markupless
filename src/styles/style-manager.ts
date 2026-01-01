@@ -1,4 +1,4 @@
-import { StyleObject } from "./types";
+import type { StyleObject } from "./types";
 
 /**
  * Singleton class that manages CSS injection.

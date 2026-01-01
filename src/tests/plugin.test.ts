@@ -1,6 +1,6 @@
-import { describe, it, expect, mock, spyOn } from "bun:test";
-import app, { App } from "@/core/app";
-import { Plugin } from "@/core/plugin";
+import { describe, expect, it, mock, spyOn } from "bun:test";
+import app, { type App } from "@/core/app";
+import type { Plugin } from "@/core/plugin";
 
 describe("Plugin System", () => {
 	it("should register and install a plugin", () => {

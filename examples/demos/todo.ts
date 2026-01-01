@@ -1,13 +1,13 @@
 import {
-	section,
-	h2,
-	div,
-	input,
 	button,
-	ul,
+	div,
+	h2,
+	input,
 	li,
-	state,
+	section,
 	span,
+	state,
+	ul,
 } from "../../src";
 
 export const TodoApp = () => {

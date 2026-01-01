@@ -1,12 +1,12 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import {
-	required,
-	minLength,
-	maxLength,
 	email,
-	pattern,
-	min,
 	max,
+	maxLength,
+	min,
+	minLength,
+	pattern,
+	required,
 	validate,
 } from "../utils/validators";
 

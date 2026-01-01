@@ -1,5 +1,5 @@
-import { describe, it, expect, mock } from "bun:test";
-import { state, effect } from "../state";
+import { describe, expect, it, mock } from "bun:test";
+import { effect, state } from "../state";
 
 describe("State Management", () => {
 	it("should create a reactive state", () => {

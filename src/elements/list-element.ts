@@ -3,11 +3,7 @@ import { BaseElement } from "./base-element";
 /**
  * Represents a list container (`<ul>` or `<ol>`).
  */
-export class ListElement extends BaseElement {
-	constructor(tagName: "ul" | "ol") {
-		super(tagName);
-	}
-}
+export class ListElement extends BaseElement {}
 
 /**
  * Represents a list item (`<li>`).

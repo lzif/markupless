@@ -1,12 +1,12 @@
-import { describe, it, expect } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import {
-	table,
-	thead,
-	tbody,
-	tr,
-	th,
-	td,
 	TableElement,
+	table,
+	tbody,
+	td,
+	th,
+	thead,
+	tr,
 } from "../table-element";
 
 describe("Table Elements", () => {

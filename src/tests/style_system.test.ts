@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach } from "bun:test";
-import { StyleManager } from "@/styles/style-manager";
+import { beforeEach, describe, expect, it } from "bun:test";
 import { BaseElement } from "@/elements/base-element";
+import { StyleManager } from "@/styles/style-manager";
 import { createTheme } from "@/styles/theme";
 
 describe("Style System", () => {
