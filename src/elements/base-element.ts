@@ -118,6 +118,10 @@ export class BaseElement {
                     if (key === "style") continue;
                     if (key === "class") {
                          this.class(value as string);
+                    } else if (key.startsWith("on") && typeof value === "function") {
+                        // Handle event listeners (e.g., { onclick: () => ... })
+                        const eventName = key.substring(2).toLowerCase();
+                        this.on(eventName as keyof HTMLElementEventMap, value as any);
                     } else {
                         this.attr(key, String(value));
                     }

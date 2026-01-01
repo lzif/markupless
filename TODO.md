@@ -1,108 +1,33 @@
-# Struktur Proyek Recommended
+# Project TODOs
 
-```
-markupless-framework/
-│
-├── src/
-│   ├── core/
-│   │   ├── app.ts           # Inti framework utama
-│   │   ├── state.ts         # Manajemen state
-│   │   ├── logic.ts         # Logika dan event handling
-│   │   ├── rendering.ts     # Mekanisme rendering
-│   │   └── types.ts         # Tambahan: Define style types
-│   │
-│   ├── elements/
-│   │   ├── base-element.ts  # Kelas dasar untuk semua elemen
-│   │   ├── text-elements.ts # h1, h2, p, dll
-│   │   ├── container.ts     # section, div, dll
-│   │   ├── interactive.ts   # button, input, dll
-│   │   └── types.ts         # Tambahan: Define style types
-│   │
-│   ├── styles/
-│   │   ├── base-style.ts    # Style dasar
-│   │   ├── style-manager.ts # Manajemen styling dinamis
-│   │   └── types.ts         # Tambahan: Define style types
-│   │
-│   ├── utils/
-│   │   ├── helpers.ts       # Fungsi utilitas umum
-│   │   ├── validators.ts    # Validasi input/state
-│   │   └── types.ts         # Tambahan: Define style types
-│   │
-│   ├── index.ts             # Entry point export
-│   └── types.ts             # Global type definitions
-│
-├── package.json
-└── README.md
-```
+This file tracks the immediate tasks and progress for the **Markupless** framework.
 
-# TODO Pengembangan Framework Markupless (Fase & Sub-Tugas)
+## **Priority 1: Core Functionality (Phases 1-3)**
+- [x] **Setup**: Initialize repository and tooling.
+- [x] **`BaseElement` Implementation**: Create the base class for DOM manipulation.
+- [x] **"Magic" Argument Parser**: Implement the logic to infer argument types.
+- [x] **Reactivity System**: Build the `State` proxy and subscriber system.
+- [x] **Basic Wrappers**: Implement `div`, `span`, `button`, `input` factories.
+- [x] **List Rendering**: Implement efficient `.each()` method.
 
-## Fase 1: Arsitektur Dasar
-1. Merancang Arsitektur Inti
-   - [x] Buat struktur direktori sesuai rancangan
-   - [x] Setup project dengan module bundler (misalnya Webpack/Rollup)
-   - [x] Konfigurasi build system
-   - [x] Setup testing framework (Vitest)
+## **Priority 2: Styling & UX (Phase 4)**
+- [x] **`StyleManager`**: Implement CSS-in-JS injection logic.
+- [x] **Theme Config**: Create a default theme and configuration method.
+- [x] **Pseudo-classes**: Support `:hover`, `:focus` in style objects.
 
-2. Implementasi Core Application
-   - [x] Buat `app.ts` sebagai entry point
-   - [x] Implementasi method `.setTitle()`
-   - [x] Implementasi method `.addStyle()`
-   - [x] Implementasi method `.state()`
-   - [x] Implementasi method `.logic()`
-   - [x] Implementasi method `.add()`
-   - [x] Implementasi method `.render()`
+## **Priority 3: Advanced Features (Phase 5)**
+- [x] **Routing**: Implement `Router` class and `app.route()` method.
+- [x] **Input Validation**: Add validators for forms (email, required, minLength).
+- [x] **Plugin Architecture**: Design and implement `Plugin` interface.
+- [x] **Server-Side Rendering**: Add support for rendering to strings.
 
-## Fase 2: Manajemen Elemen
-3. Bangun Sistem Elemen
-   - [x] Buat base class `BaseElement`
-   - [x] Implementasi text elements (h1, h2, p)
-   - [x] Implementasi container elements (section, div)
-   - [x] Implementasi interactive elements (button)
-    - [x] Implementasi list elements (ul, ol, li)
-    - [x] Implementasi media elements (img, video, audio)
-    - [x] Implementasi table elements (table, tr, td)
-   - [x] Tambahkan method `.with()` untuk komposisi
-   - [x] Tambahkan method `.style()` untuk styling
-   - [x] Tambahkan method `.onClick()` untuk event handling
+## **Priority 4: Quality Assurance (Phase 6)**
+- [x] **Unit Tests**: Write tests for `Router`, `StyleManager`, and `State`.
+- [ ] **E2E Tests**: Basic user flows (Todo App demo).
+- [ ] **Docs**: Write `CONTRIBUTING.md` and API references.
+- [ ] **Optimization**: Profile memory usage of `State` proxies.
 
-## Fase 3: State Management
-4. Kembangkan State Management
-   - [x] Buat mekanisme state reaktif
-   - [x] Implementasi pelacakan perubahan state
-   - [x] Buat sistem binding state ke DOM
-   - [x] Implementasi logika update otomatis
-
-## Fase 4: Style & Theming
-5. Sistem Styling Dinamis
-   - [x] Buat mekanisme style inline
-   - [x] Implementasi hover styles
-   - [x] Buat sistem tema/preset
-   - [x] Tambahkan dukungan CSS-in-JS
-
-## Fase 5: Advanced Features
-6. Fitur Lanjutan
-   - [x] Routing sederhana
-   - [x] Validasi input
-   - [x] Plugin system
-   - [ ] Performance optimization
-   - [x] Server-side rendering support
-
-## Fase 6: Dokumentasi & Testing
-7. Dokumentasi
-   - [ ] Buat README komprehensif
-   - [ ] Tulis dokumentasi API
-   - [ ] Buat contoh penggunaan
-
-8. Testing
-   - [x] Unit test untuk setiap modul
-   - [ ] Integration test
-   - [ ] Performance benchmark
-   - [ ] Uji kompatibilitas browser
-
-## Fase 7: Publikasi
-9. Persiapan Rilis
-   - [ ] Optimize bundle size
-   - [ ] Buat script build
-   - [ ] Publikasi ke npm
-   - [ ] Setup CI/CD
+## **Priority 5: Future / Nice-to-Have**
+- [ ] **Virtual Scrolling**: For large lists in `.each()`.
+- [ ] **Animation Library**: Simple transition helpers (`.animate()`).
+- [ ] **Hydration**: Client-side hydration for SSR content.

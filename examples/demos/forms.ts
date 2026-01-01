@@ -24,8 +24,8 @@ import {
 
 export const FormDemo = () => {
 	const name = state("");
-    const emailState = state("");
-    const password = state("");
+	const emailState = state("");
+	const password = state("");
 
 	const errors = state({
 		name: [] as string[],
@@ -46,65 +46,67 @@ export const FormDemo = () => {
 		const hasErrors = Object.values(errors.value).some((err) => err.length > 0);
 
 		if (!hasErrors) {
-			alert(`Form submitted!\n${JSON.stringify({name: name.value, email: emailState.value, password: password.value}, null, 2)}`);
+			alert(
+				`Form submitted!\n${JSON.stringify({ name: name.value, email: emailState.value, password: password.value }, null, 2)}`,
+			);
 			// Reset
-            name.value = "";
-            emailState.value = "";
-            password.value = "";
+			name.value = "";
+			emailState.value = "";
+			password.value = "";
 		}
 	};
 
 	return section(
-        {
+		{
 			style: {
-                padding: "20px",
-                maxWidth: "400px",
-                margin: "0 auto",
-                fontFamily: "sans-serif",
-            }
+				padding: "20px",
+				maxWidth: "400px",
+				margin: "0 auto",
+				fontFamily: "sans-serif",
+			},
 		},
 		h2("Registration Form", { style: { textAlign: "center" } }),
-		
-        // Name Field
-        div({ style: { marginBottom: "15px" } },
+
+		// Name Field
+		div(
+			{ style: { marginBottom: "15px" } },
 			span("Name", { style: { display: "block", marginBottom: "5px" } }),
-            input(name, { 
-                placeholder: "Enter Name",
-                style: { width: "100%", padding: "8px", boxSizing: "border-box" } 
-            }),
-			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } })
-                .each(
-					() => errors.value.name,
-					(err) => span(err, { style: { display: "block" } }),
-				),
+			input(name, {
+				placeholder: "Enter Name",
+				style: { width: "100%", padding: "8px", boxSizing: "border-box" },
+			}),
+			div(
+				{ style: { color: "red", fontSize: "12px", marginTop: "5px" } },
+				() => errors.value.name.join(", "),
+			),
 		),
 
-        // Email Field
-		div({ style: { marginBottom: "15px" } },
+		// Email Field
+		div(
+			{ style: { marginBottom: "15px" } },
 			span("Email", { style: { display: "block", marginBottom: "5px" } }),
-            input("email", emailState, { 
-                placeholder: "Enter Email",
-                style: { width: "100%", padding: "8px", boxSizing: "border-box" } 
-            }),
-			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } })
-                .each(
-					() => errors.value.email,
-					(err) => span(err, { style: { display: "block" } }),
-				),
+			input("email", emailState, {
+				placeholder: "Enter Email",
+				style: { width: "100%", padding: "8px", boxSizing: "border-box" },
+			}),
+			div(
+				{ style: { color: "red", fontSize: "12px", marginTop: "5px" } },
+				() => errors.value.email.join(", "),
+			),
 		),
 
-        // Password Field
-		div({ style: { marginBottom: "15px" } },
+		// Password Field
+		div(
+			{ style: { marginBottom: "15px" } },
 			span("Password", { style: { display: "block", marginBottom: "5px" } }),
-            input("password", password, { 
-                placeholder: "Enter Password",
-                style: { width: "100%", padding: "8px", boxSizing: "border-box" } 
-            }),
-			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } })
-                .each(
-					() => errors.value.password,
-					(err) => span(err, { style: { display: "block" } }),
-				),
+			input("password", password, {
+				placeholder: "Enter Password",
+				style: { width: "100%", padding: "8px", boxSizing: "border-box" },
+			}),
+			div(
+				{ style: { color: "red", fontSize: "12px", marginTop: "5px" } },
+				() => errors.value.password.join(", "),
+			),
 		),
 
 		button("Register", {
@@ -115,7 +117,8 @@ export const FormDemo = () => {
 				color: "white",
 				border: "none",
 				cursor: "pointer",
-			}
-        }).onClick(handleSubmit)
+			},
+			onclick: handleSubmit,
+		}),
 	);
 };

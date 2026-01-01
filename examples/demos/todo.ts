@@ -44,8 +44,9 @@ export const TodoApp = () => {
 					color: "white",
 					border: "none",
 					cursor: "pointer",
-				}
-			}).onClick(addTask),
+				},
+				onclick: addTask
+			}),
 		),
 		ul({ style: { listStyle: "none", padding: "0" } })
             .each(tasks, (task, index) =>
@@ -65,9 +66,10 @@ export const TodoApp = () => {
 							border: "none",
 							background: "none",
 							cursor: "pointer",
+						},
+						onclick: () => {
+							tasks.value = tasks.value.filter((_, i) => i !== index);
 						}
-					}).onClick(() => {
-						tasks.value = tasks.value.filter((_, i) => i !== index);
 					}),
 				),
 			),
