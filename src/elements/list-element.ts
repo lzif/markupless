@@ -15,12 +15,8 @@ export class ListItemElement extends BaseElement {
 }
 
 /** Creates a `<ul>` element. */
-export const ul = () => new ListElement("ul");
+export const ul = (...args: any[]) => new ListElement("ul").applyMagic(args);
 /** Creates an `<ol>` element. */
-export const ol = () => new ListElement("ol");
+export const ol = (...args: any[]) => new ListElement("ol").applyMagic(args);
 /** Creates an `<li>` element. */
-export const li = (text?: string) => {
-	const el = new ListItemElement();
-	if (text) el.text(text);
-	return el;
-};
+export const li = (...args: any[]) => new ListItemElement().applyMagic(args);

@@ -1,11 +1,21 @@
 let activeEffect: (() => void) | null = null;
 const stateMap = new WeakMap();
 
+export const STATE_SYMBOL = Symbol.for("markupless.state");
+
 /**
  * Represents a reactive state wrapper.
  */
 export interface State<T> {
 	value: T;
+	[STATE_SYMBOL]: boolean;
+}
+
+/**
+ * Checks if a value is a State object.
+ */
+export function isState(value: any): value is State<any> {
+	return value && typeof value === "object" && value[STATE_SYMBOL] === true;
 }
 
 /**
@@ -23,33 +33,32 @@ export function state<T>(initialValue: T): State<T> {
 	const value = initialValue;
 	const dependents = new Set<() => void>();
 
-	const proxy = new Proxy(
-		{ value },
-		{
-			get(target, key) {
-				if (key === "value") {
-					if (activeEffect) {
-						dependents.add(activeEffect);
-					}
-					return target[key as keyof typeof target];
-				}
-				return target[key as keyof typeof target];
-			},
-			set(target, key, newValue) {
-				if (
-					key === "value" &&
-					target[key as keyof typeof target] !== newValue
-				) {
-					target[key as keyof typeof target] = newValue;
-					dependents.forEach((effect) => effect());
-				}
+	const targetObject = { value };
+
+	const proxy = new Proxy(targetObject, {
+		get(target, key) {
+			if (key === STATE_SYMBOL) {
 				return true;
-			},
+			}
+			if (key === "value") {
+				if (activeEffect) {
+					dependents.add(activeEffect);
+				}
+				return target.value;
+			}
+			return Reflect.get(target, key);
 		},
-	);
+		set(target, key, newValue) {
+			if (key === "value" && target.value !== newValue) {
+				target.value = newValue;
+				dependents.forEach((effect) => effect());
+			}
+			return Reflect.set(target, key, newValue);
+		},
+	});
 
 	stateMap.set(proxy, { dependents, value });
-	return proxy as State<T>;
+	return proxy as unknown as State<T>;
 }
 
 /**

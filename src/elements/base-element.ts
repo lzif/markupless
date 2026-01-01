@@ -1,4 +1,4 @@
-import { effect, type State } from "@/core/state";
+import { effect, type State, isState } from "@/core/state";
 import { StyleManager } from "@/styles/style-manager";
 import type { StyleObject } from "@/styles/types";
 
@@ -15,6 +15,7 @@ export class BaseElement {
 	private readonly isInBrowser: boolean;
 	private textEffect: (() => void) | null = null;
 	private listEffect: (() => void) | null = null;
+    private magicBinding: (() => void) | null = null;
 
 	/**
 	 * Creates a new BaseElement.
@@ -32,6 +33,102 @@ export class BaseElement {
 				!!(globalThis as any).window &&
 				!!(globalThis as any).document);
 	}
+
+    /**
+     * Applies "Magic" argument processing.
+     * Infers intent based on argument types.
+     * @param args - Variadic arguments.
+     * @returns The element instance.
+     */
+    applyMagic(args: any[]): this {
+        for (const arg of args) {
+            if (arg === undefined || arg === null) continue;
+
+            if (arg instanceof BaseElement) {
+                this.children.push(arg);
+            } else if (Array.isArray(arg)) {
+                // If it's an array, it could be a list of children
+                // Or if it's reactive? The protocol says "Argument is an Array? -> Treat as List Rendering".
+                // But normally we just append arrays of elements.
+                // If it's a State<Array>, that's handled by isState check below? No, State<Array> is an object.
+                // So this is a static array of children.
+                arg.forEach(child => {
+                    if (child instanceof BaseElement) {
+                        this.children.push(child);
+                    }
+                });
+            } else if (isState(arg)) {
+                // Reactive Content or Binding
+                if (this.tagName === "input" || this.tagName === "textarea" || this.tagName === "select") {
+                     // Auto-bind value and input event
+                     // We need to know if this is a value binding.
+                     // The protocol says: "Pattern: input(state) -> Automatically bind value to state.value AND listen to input events"
+                     
+                     // We need to defer this binding until render or set it up now.
+                     // We can set up the effect now.
+                     
+                     // Two-way binding
+                     this.attr("value", String(arg.value)); // Initial value
+
+                     // Bind State -> Input
+                     this.magicBinding = () => {
+                        const val = arg.value;
+                         if (this.domElement && (this.domElement as any).value !== val) {
+                             (this.domElement as any).value = val;
+                         }
+                         // Also update attribute for SSR/initial render consistency if needed, 
+                         // though .value property is what matters for inputs.
+                     };
+
+                     // Bind Input -> State
+                     this.on("input", (e) => {
+                         const target = e.target as HTMLInputElement;
+                         arg.value = target.value;
+                     });
+
+                } else {
+                    // Reactive Text
+                     this.text(arg as State<any>);
+                }
+            } else if (typeof arg === "function") {
+                // Derived State or Lazy Component
+                // "Argument is a Function? -> Treat as a Derived State or Lazy Component."
+                try {
+                    const result = arg();
+                    if (result instanceof BaseElement) {
+                        // It's a lazy component!
+                        this.children.push(result);
+                    } else {
+                         // It's a reactive text getter
+                         this.text(arg);
+                    }
+                } catch (e) {
+                    // If it crashes, maybe it needs arguments?
+                    // Safe bet is treating as text getter.
+                    this.text(arg);
+                }
+            } else if (typeof arg === "object") {
+                // Plain Object -> Attributes / Styles
+                // "Merge multiple objects intelligently"
+                if (arg.style) {
+                    this.style(arg.style);
+                }
+                // Handle other attributes
+                for (const [key, value] of Object.entries(arg)) {
+                    if (key === "style") continue;
+                    if (key === "class") {
+                         this.class(value as string);
+                    } else {
+                        this.attr(key, String(value));
+                    }
+                }
+            } else {
+                // Primitive -> Static Text
+                this.text(String(arg));
+            }
+        }
+        return this;
+    }
 
 	/**
 	 * Adds child elements to this element.
@@ -85,7 +182,7 @@ export class BaseElement {
 					this.domElement.textContent = this.textContent;
 				}
 			};
-		} else if (content && typeof content === "object" && "value" in content) {
+		} else if (isState(content)) {
 			// It's a State object
 			this.textEffect = () => {
 				this.textContent = String(content.value);
@@ -115,11 +212,7 @@ export class BaseElement {
 			let data: T[];
 			if (typeof dataSource === "function") {
 				data = dataSource();
-			} else if (
-				dataSource &&
-				typeof dataSource === "object" &&
-				"value" in dataSource
-			) {
+			} else if (isState(dataSource)) {
 				data = dataSource.value;
 			} else {
 				data = [];
@@ -147,9 +240,12 @@ export class BaseElement {
 	 * div().style({ color: "red", fontSize: "16px" });
 	 */
 	style(styles: Partial<CSSStyleDeclaration>): this {
-		this.attributes.style = Object.entries(styles)
+        const styleString = Object.entries(styles)
 			.map(([key, value]) => `${key}: ${value}`)
 			.join("; ");
+        
+        const existingStyle = this.attributes.style ? this.attributes.style + "; " : "";
+		this.attributes.style = existingStyle + styleString;
 		return this;
 	}
 
@@ -243,6 +339,11 @@ export class BaseElement {
 			} else {
 				element.textContent = this.textContent;
 			}
+
+            // Initialize magic binding (two-way for inputs)
+            if (this.magicBinding) {
+                effect(this.magicBinding);
+            }
 
 			// Initialize list content (using effect if available)
 			if (this.listEffect) {

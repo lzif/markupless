@@ -12,12 +12,20 @@ import {
 	validate,
 } from "../../out";
 
+// We need individual states for two-way binding to work cleanly with the current implementation
+// of `input(state)`.
+// The current `state({...})` returns a proxy where accessing properties returns values, not sub-states.
+// To support `input(formData.name)`, we'd need nested proxies or just use individual states for fields.
+// For the "Magic" to work as `input(state)`, `state` must be the State object.
+// If I use `const name = state("")`, `input(name)` works.
+// If I use `const form = state({ name: "" })`, `input(form.value.name)` passes a string, not a state.
+// So I should refactor the demo to use individual states or maybe we need a way to get a sub-state.
+// Given the "Magic" constraint, let's use individual states for the fields for maximum clarity and magic.
+
 export const FormDemo = () => {
-	const formData = state({
-		name: "",
-		email: "",
-		password: "",
-	});
+	const name = state("");
+    const emailState = state("");
+    const password = state("");
 
 	const errors = state({
 		name: [] as string[],
@@ -30,101 +38,84 @@ export const FormDemo = () => {
 
 		// Validate
 		errors.value = {
-			name: validate(formData.value.name, [required, minLength(3)]),
-			email: validate(formData.value.email, [required, email]),
-			password: validate(formData.value.password, [required, minLength(6)]),
+			name: validate(name.value, [required, minLength(3)]),
+			email: validate(emailState.value, [required, email]),
+			password: validate(password.value, [required, minLength(6)]),
 		};
 
 		const hasErrors = Object.values(errors.value).some((err) => err.length > 0);
 
 		if (!hasErrors) {
-			alert(`Form submitted!\n${JSON.stringify(formData.value, null, 2)}`);
+			alert(`Form submitted!\n${JSON.stringify({name: name.value, email: emailState.value, password: password.value}, null, 2)}`);
 			// Reset
-			formData.value = { name: "", email: "", password: "" };
+            name.value = "";
+            emailState.value = "";
+            password.value = "";
 		}
 	};
 
-	return section()
-		.style({
-			padding: "20px",
-			maxWidth: "400px",
-			margin: "0 auto",
-			fontFamily: "sans-serif",
-		})
-		.with(h2("Registration Form").style({ textAlign: "center" }))
-		.with(
-			div()
-				.style({ marginBottom: "15px" })
-				.with(span("Name").style({ display: "block", marginBottom: "5px" }))
-				.with(
-					input()
-						.value(formData.value.name)
-						.onInput(
-							(val) => (formData.value = { ...formData.value, name: val }),
-						)
-						.style({ width: "100%", padding: "8px", boxSizing: "border-box" }),
-				)
-				.with(
-					div()
-						.style({ color: "red", fontSize: "12px", marginTop: "5px" })
-						.each(
-							() => errors.value.name,
-							(err) => span(err).style({ display: "block" }),
-						),
+	return section(
+        {
+			style: {
+                padding: "20px",
+                maxWidth: "400px",
+                margin: "0 auto",
+                fontFamily: "sans-serif",
+            }
+		},
+		h2("Registration Form", { style: { textAlign: "center" } }),
+		
+        // Name Field
+        div({ style: { marginBottom: "15px" } },
+			span("Name", { style: { display: "block", marginBottom: "5px" } }),
+            input(name, { 
+                placeholder: "Enter Name",
+                style: { width: "100%", padding: "8px", boxSizing: "border-box" } 
+            }),
+			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } })
+                .each(
+					() => errors.value.name,
+					(err) => span(err, { style: { display: "block" } }),
 				),
-		)
-		.with(
-			div()
-				.style({ marginBottom: "15px" })
-				.with(span("Email").style({ display: "block", marginBottom: "5px" }))
-				.with(
-					input("email")
-						.value(formData.value.email)
-						.onInput(
-							(val) => (formData.value = { ...formData.value, email: val }),
-						)
-						.style({ width: "100%", padding: "8px", boxSizing: "border-box" }),
-				)
-				.with(
-					div()
-						.style({ color: "red", fontSize: "12px", marginTop: "5px" })
-						.each(
-							() => errors.value.email,
-							(err) => span(err).style({ display: "block" }),
-						),
+		),
+
+        // Email Field
+		div({ style: { marginBottom: "15px" } },
+			span("Email", { style: { display: "block", marginBottom: "5px" } }),
+            input("email", emailState, { 
+                placeholder: "Enter Email",
+                style: { width: "100%", padding: "8px", boxSizing: "border-box" } 
+            }),
+			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } })
+                .each(
+					() => errors.value.email,
+					(err) => span(err, { style: { display: "block" } }),
 				),
-		)
-		.with(
-			div()
-				.style({ marginBottom: "15px" })
-				.with(span("Password").style({ display: "block", marginBottom: "5px" }))
-				.with(
-					input("password")
-						.value(formData.value.password)
-						.onInput(
-							(val) => (formData.value = { ...formData.value, password: val }),
-						)
-						.style({ width: "100%", padding: "8px", boxSizing: "border-box" }),
-				)
-				.with(
-					div()
-						.style({ color: "red", fontSize: "12px", marginTop: "5px" })
-						.each(
-							() => errors.value.password,
-							(err) => span(err).style({ display: "block" }),
-						),
+		),
+
+        // Password Field
+		div({ style: { marginBottom: "15px" } },
+			span("Password", { style: { display: "block", marginBottom: "5px" } }),
+            input("password", password, { 
+                placeholder: "Enter Password",
+                style: { width: "100%", padding: "8px", boxSizing: "border-box" } 
+            }),
+			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } })
+                .each(
+					() => errors.value.password,
+					(err) => span(err, { style: { display: "block" } }),
 				),
-		)
-		.with(
-			button("Register")
-				.style({
-					width: "100%",
-					padding: "10px",
-					background: "#28a745",
-					color: "white",
-					border: "none",
-					cursor: "pointer",
-				})
-				.onClick(handleSubmit),
-		);
+		),
+
+		button("Register", {
+			style: {
+				width: "100%",
+				padding: "10px",
+				background: "#28a745",
+				color: "white",
+				border: "none",
+				cursor: "pointer",
+			}
+        }).onClick(handleSubmit)
+	);
 };

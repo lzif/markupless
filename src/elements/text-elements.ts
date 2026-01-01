@@ -1,4 +1,5 @@
 import { BaseElement } from "./base-element";
+import { type State } from "@/core/state";
 
 /**
  * Represents a generic text-containing element.
@@ -17,25 +18,43 @@ export class TextElement extends BaseElement {
 	}
 }
 
+type MagicArg = 
+    | string 
+    | number 
+    | BaseElement 
+    | State<any> 
+    | Record<string, any> 
+    | (() => any)
+    | MagicArg[];
+
+type TextFactory = {
+    (text: string): TextElement;
+    (text: State<string | number>): TextElement;
+    (attributes: Record<string, any>, text: string): TextElement;
+    (...args: MagicArg[]): TextElement;
+};
+
+const createText = (tagName: string) => (...args: any[]) => new TextElement(tagName).applyMagic(args);
+
 /** Creates an `<h1>` element. */
-export const h1 = (text?: string) => new TextElement("h1", text);
+export const h1: TextFactory = createText("h1");
 /** Creates an `<h2>` element. */
-export const h2 = (text?: string) => new TextElement("h2", text);
+export const h2: TextFactory = createText("h2");
 /** Creates an `<h3>` element. */
-export const h3 = (text?: string) => new TextElement("h3", text);
+export const h3: TextFactory = createText("h3");
 /** Creates an `<h4>` element. */
-export const h4 = (text?: string) => new TextElement("h4", text);
+export const h4: TextFactory = createText("h4");
 /** Creates an `<h5>` element. */
-export const h5 = (text?: string) => new TextElement("h5", text);
+export const h5: TextFactory = createText("h5");
 /** Creates an `<h6>` element. */
-export const h6 = (text?: string) => new TextElement("h6", text);
+export const h6: TextFactory = createText("h6");
 /** Creates a `<p>` element. */
-export const p = (text?: string) => new TextElement("p", text);
+export const p: TextFactory = createText("p");
 /** Creates a `<span>` element. */
-export const span = (text?: string) => new TextElement("span", text);
+export const span: TextFactory = createText("span");
 /** Creates a `<small>` element. */
-export const small = (text?: string) => new TextElement("small", text);
+export const small: TextFactory = createText("small");
 /** Creates a `<strong>` element. */
-export const strong = (text?: string) => new TextElement("strong", text);
+export const strong: TextFactory = createText("strong");
 /** Creates an `<em>` element. */
-export const em = (text?: string) => new TextElement("em", text);
+export const em: TextFactory = createText("em");

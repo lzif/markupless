@@ -1,27 +1,61 @@
-# **Markupless Framework** 🚀✨
+# Markupless ✨
 
-![Markupless Version](https://img.shields.io/badge/Version-0.3.0-blue)
+**The Framework that understands your intent.**
+
+![Markupless Version](https://img.shields.io/badge/Version-0.4.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![TypeScript](https://img.shields.io/badge/Built%20With-TypeScript-blue)
-![Maintainability](https://img.shields.io/badge/Maintainability-A%2B-brightgreen)
+![Magically Working](https://img.shields.io/badge/Magically-Working-purple)
 
-Markupless is a modern **JavaScript Framework** that offers a **markup-less** approach to building web applications. It is **readable**, **intuitive**, and designed to minimize boilerplate! 🚀  
+Markupless is a **high-abstraction** JavaScript framework designed to make raw DOM manipulation feel like magic. It combines the power of direct DOM access with intelligent argument inference.
 
-Built for developers who want to focus on **logic and end results**, Markupless allows you to create applications that are **clean**, **magically working**, and **powerful** using a fluent, chainable API.
+**Why Markupless?**
+Most frameworks make you work for them (hooks, compilers, v-doms). Markupless works for *you*.
+
+## 🎩 The Magic Syntax
+
+**1. Smart Attributes & Styling**
+No need for `.style()` or `.className()`. Just pass an object.
+```typescript
+div({ 
+  class: "card", 
+  style: { color: "blue" } 
+})
+```
+
+**2. Implicit Reactivity**
+Don't subscribe manually. Just pass the state.
+
+```typescript
+const count = state(0);
+// Framework auto-updates the text when count changes
+h1("Count: ", count) 
+```
+
+**3. Auto-Wired Forms**
+Two-way binding is one line of code.
+
+```typescript
+const name = state("");
+// Auto-binds value and input event
+input(name, { placeholder: "Your Name" }) 
+```
+
+**No Build Step. No JSX. Just Logic.**
 
 ---
 
 ## **🔥 Key Features**
 
-- **Fluent API**: Build your UI with chainable methods that read like natural language. 🧠
-- **Reactive State Management**: Simple, proxy-based state that automatically updates the UI. 🌟
-- **Component System**: Everything is a `BaseElement`, making composition easy. 🧩
-- **Client-Side Routing**: Built-in router for Single Page Applications (SPA). 🗺️
-- **Input Validation**: robust validation utilities for forms. ✅
-- **Plugin System**: Easily extensible architecture. 🔌
-- **CSS-in-JS**: Scoped styling with `StyleManager` and global theming support. 🎨
-- **TypeScript First**: Written in TypeScript for excellent type safety and developer experience. 🛡️
-- **Server-Side Rendering (SSR)**: Support for rendering to strings for SEO and performance. ⚡
+- **Magically Working API**: Infers intent from arguments. 🧠
+- **Reactive State Management**: Simple, proxy-based state. 🌟
+- **Component System**: Everything is a `BaseElement`. 🧩
+- **Client-Side Routing**: Built-in router for SPAs. 🗺️
+- **Input Validation**: Robust validation utilities. ✅
+- **Plugin System**: Easily extensible. 🔌
+- **CSS-in-JS**: Scoped styling with `StyleManager`. 🎨
+- **TypeScript First**: Excellent type safety. 🛡️
+- **Server-Side Rendering (SSR)**: Support for rendering to strings. ⚡
 
 ---
 
@@ -45,11 +79,8 @@ import { app, section, h1 } from "markupless";
 app("#app")
   .config({ title: "Hello Markupless!" })
   .add(
-    section().with(
-      h1("Hello, World!").style({
-        color: "#007BFF",
-        textAlign: "center",
-      })
+    section(
+      h1("Hello, World!", { style: { color: "#007BFF", textAlign: "center" } })
     )
   )
   .render();
@@ -64,7 +95,7 @@ app("#app")
 Manage state and lists effortlessly:
 
 ```typescript
-import { app, section, input, button, ul, li, state, span } from "markupless";
+import { app, section, div, input, button, ul, li, state, span } from "markupless";
 
 // Define State
 const tasks = state<string[]>([]);
@@ -72,12 +103,10 @@ const newTask = state("");
 
 // Define UI
 app("#app").add(
-  section().with(
+  section(
     // Input Area
-    div().with(
-      input()
-        .placeholder("New Task...")
-        .onInput((val) => (newTask.value = val)),
+    div(
+      input(newTask, { placeholder: "New Task..." }),
       button("Add").onClick(() => {
         if (newTask.value) {
             tasks.value = [...tasks.value, newTask.value];
@@ -87,27 +116,10 @@ app("#app").add(
     ),
     // Reactive List
     ul().each(tasks, (task) => 
-      li().with(span(task))
+      li(span(task))
     )
   )
 ).render();
-```
-
-### **Form Validation**
-
-Built-in validators make form handling a breeze:
-
-```typescript
-import { validate, required, email } from "markupless";
-
-const emailState = state("");
-const errorState = state("");
-
-input().onInput(val => {
-    emailState.value = val;
-    const errors = validate(val, [required, email]);
-    errorState.value = errors[0] || ""; // Show first error
-});
 ```
 
 ---

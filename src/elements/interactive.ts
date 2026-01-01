@@ -71,17 +71,25 @@ export class ButtonElement extends InteractiveElement {
 }
 
 /** Creates a `<button>` element. */
-export const button = (text?: string) => new ButtonElement(text);
+export const button = (...args: any[]) => new ButtonElement().applyMagic(args);
 /** Creates an `<input>` element. */
-export const input = (type: string = "text") => new InputElement(type);
-/** Creates a `<textarea>` element. */
-export const textarea = () => new InteractiveElement("textarea");
-/** Creates a `<select>` element. */
-export const select = () => new InteractiveElement("select");
-/** Creates an `<option>` element. */
-export const option = (text?: string, value?: string) => {
-	const el = new InteractiveElement("option");
-	if (text) el.text(text);
-	if (value) el.attr("value", value);
-	return el;
+export const input = (...args: any[]) => {
+    // If the first argument is a string and it looks like an input type, we might want to preserve that behavior.
+    // However, the new magic system suggests strings are static text. But input doesn't have text content usually.
+    // If first arg is string, treat as type.
+    let type = "text";
+    let magicArgs = args;
+    
+    if (args.length > 0 && typeof args[0] === "string") {
+        type = args[0];
+        magicArgs = args.slice(1);
+    }
+    
+    return new InputElement(type).applyMagic(magicArgs);
 };
+/** Creates a `<textarea>` element. */
+export const textarea = (...args: any[]) => new InteractiveElement("textarea").applyMagic(args);
+/** Creates a `<select>` element. */
+export const select = (...args: any[]) => new InteractiveElement("select").applyMagic(args);
+/** Creates an `<option>` element. */
+export const option = (...args: any[]) => new InteractiveElement("option").applyMagic(args);
