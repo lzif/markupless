@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach } from "bun:test";
 import { StyleManager } from "@/styles/style-manager";
 import { BaseElement } from "@/elements/base-element";
 import { createTheme } from "@/styles/theme";

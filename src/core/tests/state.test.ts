@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, mock } from "bun:test";
 import { state, effect } from "../state";
 
 describe("State Management", () => {
@@ -11,7 +11,7 @@ describe("State Management", () => {
 
 	it("should trigger effect when state changes", () => {
 		const count = state(0);
-		const callback = vi.fn();
+		const callback = mock();
 
 		effect(() => {
 			callback(count.value);
@@ -28,7 +28,7 @@ describe("State Management", () => {
 	it("should handle multiple dependencies", () => {
 		const firstName = state("John");
 		const lastName = state("Doe");
-		const callback = vi.fn();
+		const callback = mock();
 
 		effect(() => {
 			callback(`${firstName.value} ${lastName.value}`);

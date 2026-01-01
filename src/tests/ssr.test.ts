@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import app from "@/core/app";
 import { BaseElement } from "@/elements/base-element";
 

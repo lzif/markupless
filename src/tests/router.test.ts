@@ -1,33 +1,35 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { Router } from "../core/router";
 import { BaseElement } from "../elements/base-element";
 import app, { App } from "../core/app";
 
 // Mock window and history
-const mockPushState = vi.fn();
-const mockAddEventListener = vi.fn();
+const mockPushState = mock();
+const mockAddEventListener = mock();
 
-vi.stubGlobal("window", {
+// @ts-ignore
+global.window = {
 	location: { pathname: "/" },
 	history: { pushState: mockPushState },
 	addEventListener: mockAddEventListener,
-	removeEventListener: vi.fn(),
-});
+	removeEventListener: mock(),
+};
 
-vi.stubGlobal("document", {
+// @ts-ignore
+global.document = {
 	createElement: (tag: string) => {
 		return {
 			tagName: tag.toUpperCase(),
-			setAttribute: vi.fn(),
-			appendChild: vi.fn(),
-			addEventListener: vi.fn(),
+			setAttribute: mock(),
+			appendChild: mock(),
+			addEventListener: mock(),
 			style: {},
 		};
 	},
-	querySelector: vi.fn(),
-	head: { appendChild: vi.fn() },
-	createDocumentFragment: () => ({ appendChild: vi.fn() }),
-});
+	querySelector: mock(),
+	head: { appendChild: mock() },
+	createDocumentFragment: () => ({ appendChild: mock() }),
+};
 
 describe("Router", () => {
 	let router: Router;
@@ -61,7 +63,7 @@ describe("Router", () => {
 	});
 
 	it("should navigate and notify listeners", () => {
-		const listener = vi.fn();
+		const listener = mock();
 		router.subscribe(listener);
 
 		router.navigate("/new-path");
@@ -90,10 +92,10 @@ describe("App Routing", () => {
 	beforeEach(() => {
 		root = {
 			innerHTML: "",
-			appendChild: vi.fn(),
+			appendChild: mock(),
 		};
 		// Mock document.querySelector to return our root
-		(document.querySelector as any) = vi.fn().mockReturnValue(root);
+		(document.querySelector as any) = mock().mockReturnValue(root);
 		myApp = app("#app");
 	});
 
@@ -107,7 +109,7 @@ describe("App Routing", () => {
 		const element = new BaseElement("div");
 		// Mock render to return something we can verify
 		const domElement = { tagName: "DIV" };
-		element.render = vi.fn().mockReturnValue(domElement);
+		element.render = mock().mockReturnValue(domElement);
 
 		myApp.route("/", element);
 		myApp.render();
@@ -120,8 +122,8 @@ describe("App Routing", () => {
 		const page1 = new BaseElement("h1");
 		const page2 = new BaseElement("h2");
 
-		page1.render = vi.fn().mockReturnValue({ tagName: "H1" });
-		page2.render = vi.fn().mockReturnValue({ tagName: "H2" });
+		page1.render = mock().mockReturnValue({ tagName: "H1" });
+		page2.render = mock().mockReturnValue({ tagName: "H2" });
 
 		myApp.route("/", page1);
 		myApp.route("/page2", page2);

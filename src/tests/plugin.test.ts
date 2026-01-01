@@ -1,11 +1,11 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, mock, spyOn } from "bun:test";
 import app, { App } from "@/core/app";
 import { Plugin } from "@/core/plugin";
 
 describe("Plugin System", () => {
 	it("should register and install a plugin", () => {
 		const myApp = app();
-		const installSpy = vi.fn();
+		const installSpy = mock();
 
 		const myPlugin: Plugin = {
 			name: "test-plugin",
@@ -22,8 +22,8 @@ describe("Plugin System", () => {
 
 	it("should warn if plugin is already installed", () => {
 		const myApp = app();
-		const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-		const installSpy = vi.fn();
+		const consoleSpy = spyOn(console, "warn").mockImplementation(() => {});
+		const installSpy = mock();
 
 		const myPlugin: Plugin = {
 			name: "test-plugin",

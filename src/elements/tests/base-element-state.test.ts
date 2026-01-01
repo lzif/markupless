@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import { BaseElement } from "../base-element";
 import { state } from "../../core/state";
 

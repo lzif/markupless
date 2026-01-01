@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import {
 	img,
 	video,
@@ -11,25 +11,25 @@ describe("Media Elements", () => {
 	it("should create image element", () => {
 		const el = img("test.jpg", "alt text");
 		expect(el).toBeInstanceOf(ImageElement);
-		const dom = el.render() as HTMLImageElement;
+		const dom = el.render() as unknown as HTMLImageElement;
 		expect(dom.tagName.toLowerCase()).toBe("img");
-		expect(dom.getAttribute("src")).toBe("test.jpg");
-		expect(dom.getAttribute("alt")).toBe("alt text");
+		expect((dom as any).getAttribute("src")).toBe("test.jpg");
+		expect((dom as any).getAttribute("alt")).toBe("alt text");
 	});
 
 	it("should create video element", () => {
 		const el = video("test.mp4");
 		expect(el).toBeInstanceOf(MediaElement);
-		const dom = el.render() as HTMLVideoElement;
+		const dom = el.render() as unknown as HTMLVideoElement;
 		expect(dom.tagName.toLowerCase()).toBe("video");
-		expect(dom.getAttribute("src")).toBe("test.mp4");
+		expect((dom as any).getAttribute("src")).toBe("test.mp4");
 	});
 
 	it("should create audio element", () => {
 		const el = audio("test.mp3");
 		expect(el).toBeInstanceOf(MediaElement);
-		const dom = el.render() as HTMLAudioElement;
+		const dom = el.render() as unknown as HTMLAudioElement;
 		expect(dom.tagName.toLowerCase()).toBe("audio");
-		expect(dom.getAttribute("src")).toBe("test.mp3");
+		expect((dom as any).getAttribute("src")).toBe("test.mp3");
 	});
 });

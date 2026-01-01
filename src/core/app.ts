@@ -218,6 +218,6 @@ export class App {
  * @param target - The selector for the root element.
  * @returns A new App instance.
  */
-const app = (target?: string) => new App(target);
+export const app = (target?: string) => new App(target);
 
 export default app;

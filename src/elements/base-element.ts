@@ -24,8 +24,13 @@ export class BaseElement {
 		this.tagName = tagName;
 		this.attributes = {};
 		this.children = [];
+		// Use a more robust check for browser environment or rely on global window presence
 		this.isInBrowser =
-			typeof window !== "undefined" && typeof document !== "undefined";
+			(typeof window !== "undefined" && !!window.document) ||
+			// Check if we are in a test environment with DOM mocks
+			(typeof global !== "undefined" &&
+				!!(global as any).window &&
+				!!(global as any).document);
 	}
 
 	/**

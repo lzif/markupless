@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import { ul, ol, li, ListElement, ListItemElement } from "../list-element";
 
 describe("List Elements", () => {
@@ -24,7 +24,7 @@ describe("List Elements", () => {
 
 	it("should nest items", () => {
 		const list = ul().add(li("one"), li("two"));
-		const dom = list.render();
+		const dom = list.render() as unknown as HTMLElement;
 		expect(dom.children.length).toBe(2);
 		expect(dom.children[0].textContent).toBe("one");
 		expect(dom.children[1].textContent).toBe("two");

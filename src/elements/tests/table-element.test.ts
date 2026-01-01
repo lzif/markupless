@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import {
 	table,
 	thead,
@@ -17,12 +17,12 @@ describe("Table Elements", () => {
 		);
 
 		expect(tbl).toBeInstanceOf(TableElement);
-		const dom = tbl.render();
+		const dom = tbl.render() as unknown as HTMLElement;
 		expect(dom.tagName.toLowerCase()).toBe("table");
-		expect(dom.querySelector("thead")).toBeTruthy();
-		expect(dom.querySelector("tbody")).toBeTruthy();
-		expect(dom.querySelectorAll("tr").length).toBe(2);
-		expect(dom.querySelectorAll("th").length).toBe(2);
-		expect(dom.querySelectorAll("td").length).toBe(2);
+		expect((dom as any).querySelector("thead")).toBeTruthy();
+		expect((dom as any).querySelector("tbody")).toBeTruthy();
+		expect((dom as any).querySelectorAll("tr").length).toBe(2);
+		expect((dom as any).querySelectorAll("th").length).toBe(2);
+		expect((dom as any).querySelectorAll("td").length).toBe(2);
 	});
 });
