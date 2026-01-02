@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.3](https://github.com/lzif/markupless/compare/v0.4.1...v0.4.3) (2026-01-02)
+
+
+### Bug Fixes
+
+* delete esbuild plugin which causes out/ folder not to be published to npm ([be3bf73](https://github.com/lzif/markupless/commit/be3bf7319c15c8b31799390dec206e93a79e5fca))
+* npm not include out/ folder ([68bd3d9](https://github.com/lzif/markupless/commit/68bd3d9f27caf6100e52e11140f83c7df281dadc))
+
 ## [0.4.1](https://github.com/lzif/markupless/compare/v0.4.0...v0.4.1) (2026-01-02)
 
 
