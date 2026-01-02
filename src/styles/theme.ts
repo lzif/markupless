@@ -1,7 +1,7 @@
 import { StyleManager } from "./style-manager";
 
-type ThemeValue = string | number;
-type ThemeConfig = { [key: string]: ThemeValue | ThemeConfig };
+export type ThemeValue = string | number;
+export type ThemeConfig = { [key: string]: ThemeValue | ThemeConfig };
 
 // Helper to flatten object to paths
 function flattenTheme(obj: ThemeConfig, prefix = ""): Record<string, string> {

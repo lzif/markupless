@@ -1,21 +1,12 @@
 import { BaseElement } from "./base-element";
-import { type State } from "@/core/state";
+import { MagicArg } from "./types";
 
 /**
  * Represents a container element used for layout and grouping.
  */
 export class ContainerElement extends BaseElement {}
 
-type MagicArg =
-	| string
-	| number
-	| BaseElement
-	| State<any>
-	| Record<string, any>
-	| (() => any)
-	| MagicArg[];
-
-type ContainerFactory = {
+export type ContainerFactory = {
 	(...children: BaseElement[]): ContainerElement;
 	(
 		attributes: Record<string, any>,

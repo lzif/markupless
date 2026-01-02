@@ -1,5 +1,6 @@
 import { BaseElement } from "./base-element";
 import { type State } from "@/core/state";
+import { MagicArg } from "./types";
 
 /**
  * Represents a generic text-containing element.
@@ -18,16 +19,7 @@ export class TextElement extends BaseElement {
 	}
 }
 
-type MagicArg =
-	| string
-	| number
-	| BaseElement
-	| State<any>
-	| Record<string, any>
-	| (() => any)
-	| MagicArg[];
-
-type TextFactory = {
+export type TextFactory = {
 	(text: string): TextElement;
 	(text: State<string | number>): TextElement;
 	(attributes: Record<string, any>, text: string): TextElement;
