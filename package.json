@@ -1,6 +1,6 @@
 {
 	"name": "markupless",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"description": "fluent, readable JavaScript framework that eliminates markup with magical abstractions.",
 	"type": "module",
 	"main": "out/index.js",

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/lzif/markupless/compare/v0.4.0...v0.4.1) (2026-01-02)
+
+
+### Bug Fixes
+
+* pkg files include build artifacts ([2ffd25b](https://github.com/lzif/markupless/commit/2ffd25b02f9051d5264ab2ba334f4d62cb76b779))
+
 # 0.4.0 (2026-01-02)
 
 
