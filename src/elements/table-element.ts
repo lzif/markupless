@@ -6,11 +6,14 @@ import { BaseElement } from "./base-element";
 export class TableElement extends BaseElement {}
 
 /** Creates a `<table>` element. */
-export const table = (...args: any[]) => new TableElement("table").applyMagic(args);
+export const table = (...args: any[]) =>
+	new TableElement("table").applyMagic(args);
 /** Creates a `<thead>` element. */
-export const thead = (...args: any[]) => new TableElement("thead").applyMagic(args);
+export const thead = (...args: any[]) =>
+	new TableElement("thead").applyMagic(args);
 /** Creates a `<tbody>` element. */
-export const tbody = (...args: any[]) => new TableElement("tbody").applyMagic(args);
+export const tbody = (...args: any[]) =>
+	new TableElement("tbody").applyMagic(args);
 /** Creates a `<tr>` element. */
 export const tr = (...args: any[]) => new TableElement("tr").applyMagic(args);
 /** Creates a `<th>` element. */

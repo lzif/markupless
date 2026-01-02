@@ -1,4 +1,4 @@
-import { app, button, div, h1, li, p, section, ul } from "../out";
+import { app, button, div, h1, li, p, section, ul } from "../src";
 import { FormDemo } from "./demos/forms";
 import { LoggerPlugin } from "./demos/plugins";
 import { PageOne, PageTwo } from "./demos/routing";
@@ -37,11 +37,7 @@ const Hub = () => {
 				},
 			},
 			DemoCard("Todo App", "Reactive state & lists", "/todo"),
-			DemoCard(
-				"Form Validation",
-				"Input validation & error handling",
-				"/form",
-			),
+			DemoCard("Form Validation", "Input validation & error handling", "/form"),
 			DemoCard("Routing", "Client-side navigation", "/routing/page1"),
 		),
 		section(
@@ -66,6 +62,7 @@ const Hub = () => {
 const DemoCard = (title: string, desc: string, path: string) => {
 	const navigate = (path: string) => (e: MouseEvent) => {
 		e.preventDefault();
+		console.log(path);
 		app().router.navigate(path);
 	};
 	return div(

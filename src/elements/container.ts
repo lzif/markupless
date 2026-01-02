@@ -6,23 +6,29 @@ import { type State } from "@/core/state";
  */
 export class ContainerElement extends BaseElement {}
 
-type MagicArg = 
-    | string 
-    | number 
-    | BaseElement 
-    | State<any> 
-    | Record<string, any> 
-    | (() => any)
-    | MagicArg[];
+type MagicArg =
+	| string
+	| number
+	| BaseElement
+	| State<any>
+	| Record<string, any>
+	| (() => any)
+	| MagicArg[];
 
 type ContainerFactory = {
-    (...children: BaseElement[]): ContainerElement;
-    (attributes: Record<string, any>, ...children: BaseElement[]): ContainerElement;
-    (text: string): ContainerElement;
-    (...args: MagicArg[]): ContainerElement;
+	(...children: BaseElement[]): ContainerElement;
+	(
+		attributes: Record<string, any>,
+		...children: BaseElement[]
+	): ContainerElement;
+	(text: string): ContainerElement;
+	(...args: MagicArg[]): ContainerElement;
 };
 
-const createContainer = (tagName: string) => (...args: any[]) => new ContainerElement(tagName).applyMagic(args);
+const createContainer =
+	(tagName: string) =>
+	(...args: any[]) =>
+		new ContainerElement(tagName).applyMagic(args);
 
 /** Creates a `<div>` element. */
 export const div: ContainerFactory = createContainer("div");

@@ -10,7 +10,7 @@ import {
 	span,
 	state,
 	validate,
-} from "../../out";
+} from "../../src";
 
 // We need individual states for two-way binding to work cleanly with the current implementation
 // of `input(state)`.
@@ -75,9 +75,8 @@ export const FormDemo = () => {
 				placeholder: "Enter Name",
 				style: { width: "100%", padding: "8px", boxSizing: "border-box" },
 			}),
-			div(
-				{ style: { color: "red", fontSize: "12px", marginTop: "5px" } },
-				() => errors.value.name.join(", "),
+			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } }, () =>
+				errors.value.name.join(", "),
 			),
 		),
 
@@ -89,9 +88,8 @@ export const FormDemo = () => {
 				placeholder: "Enter Email",
 				style: { width: "100%", padding: "8px", boxSizing: "border-box" },
 			}),
-			div(
-				{ style: { color: "red", fontSize: "12px", marginTop: "5px" } },
-				() => errors.value.email.join(", "),
+			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } }, () =>
+				errors.value.email.join(", "),
 			),
 		),
 
@@ -103,9 +101,8 @@ export const FormDemo = () => {
 				placeholder: "Enter Password",
 				style: { width: "100%", padding: "8px", boxSizing: "border-box" },
 			}),
-			div(
-				{ style: { color: "red", fontSize: "12px", marginTop: "5px" } },
-				() => errors.value.password.join(", "),
+			div({ style: { color: "red", fontSize: "12px", marginTop: "5px" } }, () =>
+				errors.value.password.join(", "),
 			),
 		),
 

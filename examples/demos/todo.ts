@@ -8,7 +8,7 @@ import {
 	span,
 	state,
 	ul,
-} from "../../out";
+} from "../../src";
 
 export const TodoApp = () => {
 	const tasks = state<string[]>([]);
@@ -28,15 +28,15 @@ export const TodoApp = () => {
 				maxWidth: "400px",
 				margin: "0 auto",
 				fontFamily: "sans-serif",
-			}
+			},
 		},
 		h2("Todo List", { style: { textAlign: "center", color: "#333" } }),
 		div(
 			{ style: { display: "flex", gap: "10px", marginBottom: "20px" } },
-			input(newTask, { 
-                placeholder: "Add a new task...", 
-                style: { flex: "1", padding: "8px" } 
-            }),
+			input(newTask, {
+				placeholder: "Add a new task...",
+				style: { flex: "1", padding: "8px" },
+			}),
 			button("Add", {
 				style: {
 					padding: "8px 16px",
@@ -45,11 +45,12 @@ export const TodoApp = () => {
 					border: "none",
 					cursor: "pointer",
 				},
-				onclick: addTask
+				onclick: addTask,
 			}),
 		),
-		ul({ style: { listStyle: "none", padding: "0" } })
-            .each(tasks, (task, index) =>
+		ul({ style: { listStyle: "none", padding: "0" } }).each(
+			tasks,
+			(task, index) =>
 				li(
 					{
 						style: {
@@ -57,7 +58,7 @@ export const TodoApp = () => {
 							borderBottom: "1px solid #eee",
 							display: "flex",
 							justifyContent: "space-between",
-						}
+						},
 					},
 					span(task),
 					button("×", {
@@ -69,9 +70,9 @@ export const TodoApp = () => {
 						},
 						onclick: () => {
 							tasks.value = tasks.value.filter((_, i) => i !== index);
-						}
+						},
 					}),
 				),
-			),
+		),
 	);
 };

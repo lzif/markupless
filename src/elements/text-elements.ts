@@ -18,23 +18,26 @@ export class TextElement extends BaseElement {
 	}
 }
 
-type MagicArg = 
-    | string 
-    | number 
-    | BaseElement 
-    | State<any> 
-    | Record<string, any> 
-    | (() => any)
-    | MagicArg[];
+type MagicArg =
+	| string
+	| number
+	| BaseElement
+	| State<any>
+	| Record<string, any>
+	| (() => any)
+	| MagicArg[];
 
 type TextFactory = {
-    (text: string): TextElement;
-    (text: State<string | number>): TextElement;
-    (attributes: Record<string, any>, text: string): TextElement;
-    (...args: MagicArg[]): TextElement;
+	(text: string): TextElement;
+	(text: State<string | number>): TextElement;
+	(attributes: Record<string, any>, text: string): TextElement;
+	(...args: MagicArg[]): TextElement;
 };
 
-const createText = (tagName: string) => (...args: any[]) => new TextElement(tagName).applyMagic(args);
+const createText =
+	(tagName: string) =>
+	(...args: any[]) =>
+		new TextElement(tagName).applyMagic(args);
 
 /** Creates an `<h1>` element. */
 export const h1: TextFactory = createText("h1");
