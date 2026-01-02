@@ -19,7 +19,7 @@
 		"dev:build": "bun build examples/index.html --outdir=dist",
 		"build": "bun run build.ts",
 		"test": "bun test",
-		"docs": "typedoc --entryPointStrategy Expand src --out docs",
+		"docs": "typedoc",
 		"check": "biome check src/",
 		"format": "biome format --write",
 		"release": "release-it"
@@ -53,6 +53,7 @@
 		"happy-dom": "^20.0.11",
 		"release-it": "^19.2.2",
 		"typedoc": "^0.28.15",
+		"typedoc-theme-hierarchy": "^6.0.0",
 		"typescript": "^5.9.3"
 	}
 }

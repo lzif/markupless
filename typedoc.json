@@ -1,0 +1,14 @@
+{
+	"entryPoints": ["src"],
+	"entryPointStrategy": "Expand",
+	"out": "docs",
+	"exclude": ["**/*.test.ts", "**/*.spec.ts"],
+	"excludePrivate": true,
+	"excludeProtected": true,
+	"excludeExternals": true,
+	"name": "Markupless Documentation",
+	"includeVersion": true,
+	"plugin": ["typedoc-theme-hierarchy"],
+	"theme": "hierarchy",
+	"tsconfig": "./tsconfig.json"
+}
