@@ -1,0 +1,25 @@
+{
+	"git": {
+		"commitMessage": "chore: release v${version}",
+		"tagName": "v${version}",
+		"requireCleanWorkingDir": true,
+		"push": true
+	},
+	"github": {
+		"release": false,
+		"tokenRef": "GITHUB_TOKEN"
+	},
+	"npm": {
+		"publish": false
+	},
+	"plugins": {
+		"@release-it/conventional-changelog": {
+			"preset": "angular",
+			"infile": "CHANGELOG.md"
+		}
+	},
+	"hooks": {
+		"before:init": ["bun run test"],
+		"after:bump": ["bun run build"]
+	}
+}

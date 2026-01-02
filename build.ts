@@ -1,4 +1,5 @@
 import dts from "bun-plugin-dts";
+import esbuildCleanOutdir from "esbuild-plugin-clean-outdir";
 
 await Bun.build({
 	entrypoints: ["./src/index.ts"],
@@ -8,5 +9,5 @@ await Bun.build({
 	sourcemap: true,
 	target: "browser",
 	tsconfig: "./tsconfig.json",
-	plugins: [dts()],
+	plugins: [esbuildCleanOutdir(), dts()],
 });
